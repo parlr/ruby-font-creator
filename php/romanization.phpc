@@ -1,0 +1,607 @@
+<?php
+// * PHP romanization Tool
+// * Lopez Édouard
+// * licence: Creative Commons Share Alike-3.0 (http://creativecommons.org/licenses/by-sa/3.0/)
+// * Please give credit and link back to
+// * http://hanzi.homelinux.org
+// * Ressources: http://hanzi.homelinux.org/about.php#tone-rules
+
+class romanization
+{// convert from callygraphic or numbered system to tone romanization
+
+	PRIVATE $WORD; // current word
+	PUBLIC $ROMAN;
+	PRIVATE $NB;
+	PRIVATE $ROMANIZATION;
+	// PĪNYĪN
+	PRIVATE $SKIPPED_TONES;// list of tones that we don't replace
+	PRIVATE $PINYIN_VOWELS = array('a', 'e', 'i', 'o', 'u', 'ü'); // Array of vowels used in the conversion
+	PRIVATE $UMLATU = 'ü';
+	PRIVATE $TONES = array(// modulo 6
+			'ā', 'ē', 'ī', 'ō', 'ū', 'ǖ',
+			'á', 'é', 'í', 'ó', 'ú', 'ǘ',
+			'ǎ', 'ě', 'ǐ', 'ǒ', 'ǔ', 'ǚ',
+			'à', 'è', 'ì', 'ò', 'ù', 'ǜ');
+	// KANA
+	PRIVATE $HIRAGANA = array(
+			'あ','a',
+			'か','ka',
+			'さ','sa',
+			'た','ta',
+			'な','na',
+			'は','ha',
+			'ま','ma',
+			'や','ya',
+			'ら','ra',
+			'わ','wa',
+			'が','ga',
+			'ざ','za',
+			'だ','da',
+			'ば','ba',
+			'ぱ','pa',
+			'い','i',
+			'き','ki',
+			'し','shi',
+			'ち','chi',
+			'に','ni',
+			'ひ','hi',
+			'み','mi',
+			'り','ri',
+			'ゐ','wi',
+			'ぎ','gi',
+			'じ','ji',
+			'ぢ','ji',
+			'び','bi',
+			'ぴ','pi',
+			'う','u',
+			'く','ku',
+			'す','su',
+			'つ','tsu',
+			'ぬ','nu',
+			'ふ','fu',
+			'む','mu',
+			'ゆ','yu',
+			'る','ru',
+			'ん','n',
+			'ぐ','gu',
+			'ず','zu',
+			'づ','zu',
+			'ぶ','bu',
+			'ぷ','pu',
+			'え','e',
+			'け','ke',
+			'せ','se',
+			'て','te',
+			'ね','ne',
+			'へ','he',
+			'め','me',
+			'れ','re',
+			'ゑ','we',
+			'げ','ge',
+			'ぜ','ze',
+			'で','de',
+			'べ','be',
+			'ぺ','pe',
+			'お','o',
+			'こ','ko',
+			'そ','so',
+			'と','to',
+			'の','no',
+			'ほ','ho',
+			'も','mo',
+			'よ','yo',
+			'ろ','ro',
+			'を','wo',
+			'ご','go',
+			'ぞ','zo',
+			'ど','do',
+			'ぼ','bo',
+			'ぽ','po',
+			'きゅ','kyu',
+			'しゅ','shu',
+			'ちゅ','chu',
+			'にゅ','nyu',
+			'ひゅ','hyu',
+			'みゅ','myu',
+			'りゅ','ryu',
+			'ぎゅ','gyu',
+			'じゅ','ju',
+			'ぢゅ','ju',
+			'びゅ','byu',
+			'ぴゅ','pyu',
+			'きょ','kyo',
+			'しょ','sho',
+			'ちょ','cho',
+			'にょ','nyo',
+			'ひょ','hyo',
+			'みょ','myo',
+			'りょ','ryo',
+			'ぎょ','gyo',
+			'じょ','jo',
+			'ぢょ','jo',
+			'びょ','byo',
+			'ぴょ','pyo'
+				);
+
+	function have_tone_number()
+	{// does the last character is a number ?
+		preg_match('/^([a-zü]+)([1-5])$/', $this->WORD, $match);
+		// 		var_dump($this->SKIPPED_TONES);
+		if (in_array($match[2], $this->SKIPPED_TONES)==TRUE)
+		{// this tone doesn't have any particular notation
+			$this->WORD = substr($this->WORD, 0, -1);
+			return FALSE;
+		} else
+		{
+			return (bool) !empty($match[2]); // negation_of(is_empty())
+		}
+	}
+
+	function grab_tone_number()
+	{// last number give the diacritic tone
+		if ($this->have_tone_number()==TRUE) // number are at the end of the string
+		{
+			$this->NB = substr($this->WORD, -1);
+			$this->WORD = substr($this->WORD, 0, -1);
+			return TRUE;
+		} else
+		{
+			return FALSE;
+		}
+	}
+
+	function pinyin_char($char)
+	{
+		$pinyin_vowels_pos = array_search($char, $this->PINYIN_VOWELS);
+		$pos =  (($this->NB-1)*6)+$pinyin_vowels_pos;
+		return $this->TONES[$pos];
+	}
+	function pinyin_char2()
+	{
+		$pinyin_vowels_pos = array_search($this->WORD[$i], $this->PINYIN_VOWELS);
+		$pos =  (($this->NB-1)*6)+$pinyin_vowels_pos;
+		return $this->TONES[$pos];
+	}
+	function pinyin_rule1($i)
+	{	// 1. First, look for an "a" or an "e".
+		// If either ('a' or 'e') vowel appears, it takes the tone mark.
+		// There are no possible pinyin syllables that contain both an "a" and an "e".
+		// 		echo $this->WORD[$i].'+';
+		switch($this->WORD[$i])
+		{
+			case 'a':
+			case 'e':
+				return TRUE;
+				break;
+			default:
+				return FALSE;
+		}
+	}
+	function apply_pinyin_rule1($i)
+	{
+		$this->WORD = str_replace($this->WORD[$i], $this->pinyin_char(), $this->WORD);
+	}
+
+	function pinyin_rule2($i)
+	{	// 2. If there is no "a" or "e", look for an "ou".
+		// If "ou" appears, then the "o" takes the tone mark.
+		static $o = FALSE, $opos, $u = FALSE;
+
+		switch($this->WORD[$i])
+		{
+			case 'o':
+				$o = TRUE;
+				break;
+			case 'u':
+				$u = TRUE;
+				break;
+			default:
+				return FALSE;
+		}
+		if ($o==TRUE AND $u==TRUE)
+		{
+			return TRUE;
+		} else
+		{
+			return FALSE;
+		}
+	}
+	function apply_pinyin_rule2($i)
+	{
+		$this->WORD = str_replace('o', $this->pinyin_char(), $this->WORD);
+		echo '['.$this->WORD[$i].'{PVP:'.$pos.'}, '.$this->TONES[$pos].'] — ';
+
+	}
+
+	function apply_pinyin_rule3($i)
+	{	// 3. If none of the above cases hold, then the last vowel in the syllable takes the tone mark.
+
+	}
+
+	function numbered_to_pinyin()
+	{
+		if ($this->grab_tone_number()==TRUE)
+		{
+			//echo '{'.$this->pinyin_char('a').'}';
+			$out = str_replace('a', $this->pinyin_char('a'), $this->WORD);
+			if ($out==$this->WORD)
+			{// we don't find an 'A'
+				$out = str_replace('e', $this->pinyin_char('e'), $this->WORD);
+				if ($out==$this->WORD)
+				{// we don't find an 'E'
+					if (!(substr_count($this->WORD, 'ou')>0 AND substr_count($this->WORD, 'uo')>0)==TRUE)
+					{// don't find an 'OU' or 'UO'
+						$out = str_replace('ü', $this->pinyin_char('ü'), $this->WORD);
+						if ($out==$this->WORD)
+						{// don't find Umlaut (ü)
+							for ($i=strlen($this->WORD); $i>0; $i--)
+							{// look for each character in the word begin by the end
+								$last_vowel= $this->WORD[$i];
+								if (in_array($last_vowel, $this->PINYIN_VOWELS)==TRUE)
+								{// add accent on the last vowel
+									return  $this->WORD = str_replace($last_vowel, $this->pinyin_char($last_vowel), $this->WORD);
+								}
+							}
+						} else
+						{
+							return $this->WORD = $out;
+						}
+					} else
+					{// find an 'OU' or a 'UO'
+						return $this->WORD = str_replace('o', $this->pinyin_char('o'), $this->WORD);
+					}
+				} else
+				{// find an 'E'
+					return $this->WORD = $out;
+				}
+			} else
+			{// find an 'A'
+				// 			echo '['.$out.']';
+				return $this->WORD = $out;
+			}
+		}
+	}
+
+	// *  A and e trump all other vowels and always take the tone mark.
+	// 		(There are no Mandarin syllables in Hanyu Pinyin that contain both a and e).
+	// * In the combination ou, o takes the mark.
+	// * In all other cases, the final vowel takes the mark.
+	function numbered_to_pinyin2()
+	{// convert 'huo3' to 'huǒ'
+		$this->grab_tone_number();
+		echo $this->WORD.'->'.$this->NB.', ';
+
+		for ($i=0; $i<strlen($this->WORD); $i++)
+		{// walk through the word to analyse
+			if ($this->pinyin_rule1($i)==TRUE)
+			{
+				$this->apply_pinyin_rule1($i);
+				break;
+			} else
+			{
+				if ($this->pinyin_rule2($i)==FALSE)
+				{
+					$this->apply_pinyin_rule2($i);
+				} else
+				{
+					$this->apply_pinyin_rule3($i);
+				}
+			}
+		}
+	}
+
+	function kana_to_romaji()
+	{
+		return $this->WORD;
+	}
+
+	function yale_to_hangul()
+	{
+		return $this->WORD;
+	}
+
+	function choose_romanization()
+	{
+		switch ($this->ROMANIZATION)
+		{
+			case 'pinyin':
+				$this->SKIPPED_TONES = array('0', '5');
+				$this->numbered_to_pinyin();
+				break;
+			case 'kana':
+				$this->kana_to_romaji();
+				break;
+			case 'yale':
+				$this->yale_to_hangul();
+				break;
+		}
+		$this->WORD = strtolower($this->WORD);
+	}
+
+	function __construct($str, $romanization)
+	{
+		$this->ROMANIZATION = $romanization;
+
+		$a_words = explode(' ', mb_strtolower(trim($str), 'UTF-8'));
+		// 		var_dump($a_words);
+		foreach ($a_words as $this->WORD)
+		{
+			// 			$this->WORD = $word;
+			$this->choose_romanization();
+			$this->ROMAN[] = $this->WORD;
+		}
+		$this->ROMAN = trim(implode(' ', $this->ROMAN));
+	}
+}
+
+function test_romanization()
+{
+	$tmp = array('nü3', 'YI1', 'SHANG4', 'XIA4', 'BU4 FOU3 FOU1', 'GE4 GE3', 'ZHONG1 ZHONG4', 'WEI4 WEI2',
+	'ZHI1', 'YE3', 'LE5 LIAO3', 'JIAO1', 'REN2', 'TA1', 'YI3', 'MEN5', 'HUI4 KUAI4 GUI4', 'DAN4', 'HE2 HE4', 'NI3',
+    'LAI2 LAI4', 'XIN4 SHEN1', 'GE4 GE3', 'MEN5', 'CHU1', 'DAO4', 'QIAN2', 'QU4', 'FA1 FA4 FA3 BO1', 'KE3 KE4',
+    'TONG2 TONG4', 'MA5 MA2 MA3', 'HE2 HUO4 HUO2 HE4', 'WEN4', 'MA5 MA2 MA3', 'YIN1', 'GUO2', 'GUO2',
+    'ZAI4', 'DI4 DE5', 'DUO1', 'DA4 DAI4 TAI4', 'TIAN1', 'HAO3 HAO4', 'RU2', 'ZI3 ZI5', 'XUE2', 'XUE2', 'DING4',
+    'JIA1 JIE5 GU1', 'DUI4', 'DUI4', 'XIAO3', 'JIU4', 'GONG1', 'NIAN2', 'DANG1 DANG4', 'HEN3', 'HOU4', 'DE2 DE5 DEI3',
+    'XIN1', 'XIANG3', 'YI4', 'CHENG2', 'WO3', 'SUO3', 'TI2 DI1 DI3 SHI2', 'WEN2 WEN4', 'XIN1', 'YU2 YU1 WU1',
+    'WU2 MO2', 'SHI2', 'SHI4', 'SHI2', 'ZUI4', 'HUI4 KUAI4 GUI4', 'YOU3 YOU4', 'BEN3', 'LAI2 LAI4',
+    'GUO3 KE4 LUO3 WO3', 'JI1', 'MEI2 MO4', 'FA3', 'WEI4 WEI2', 'WU2 MO2', 'RAN2', 'WEI4 WEI2', 'XIAN4', 'XIAN4',
+    'SHENG1', 'YONG4', 'DIAN4', 'DANG1 DANG4', 'FA1 FA4 BO1', 'DE5 DI2 DI4', 'KAN4 KAN1', 'ZHEN1', 'ZHI1 ZHI4',
+    'ZHAN4 ZHAN1', 'ZHANG1 ZHANG4', 'ER2 NENG2', 'NENG2 NAI4 TAI2 TAI4 NAI2 XIONG2', 'ZI4',
+    'YAO4 YAO1 YAO3', 'XUN4', 'SHUO1 SHUI4 YUE4 TUO1', 'QING3 QING4 QING1 QING2', 'XUN4',
+    'SHUO1 SHUI4 TUO1 YUE4', 'QING3 QING4 QING1 QING2', 'GUO4 GUO1', 'HUAN2 HAI2 XUAN2', 'ZHE4 ZHEI4',
+    'ZHE4 ZHEI4 YAN4', 'GUO4 GUO5 GUO1 HUO4', 'DAO4 DAO3', 'HUAN2 HAI2 XUAN2',
+    'NA4 NEI4 NA1 NA3 NE2 NEI3 NUO2 NUO4', 'DU1 DOU1', 'WEN4', 'DIAN4', 'ME5 MO5 MO3 MA5',
+    'YAN2 YAN4 XING2', 'PO4', 'QUE4', 'SHE4', 'SHEN2 SHEN1', 'KE1 KE4', 'CHENG2', 'ZHONG3 ZHONG4 CHONG2',
+    'JIU1 JIU4', 'KONG1 KONG4 KONG3', 'LI4 WEI4', 'ZHU2', 'XIAO4', 'DI4', 'DENG3', 'SUAN4', 'GUAN3', 'LEI4 LI4',
+    'XI4 JI4', 'JI2', 'ZU3 QU1', 'JIE2 JI4 JIE1', 'GEI3 JI3 XIA2', 'TONG3', 'JING1 JING4', 'WANG3', 'XIAN4',
+    'ZONG3 ZONG1', 'JI2', 'ZU3', 'JING1 JING4', 'JIE2 JIE1 JI4', 'GEI3 JI3', 'TONG3', 'MEI3', 'YI4', 'LAO3', 'KAO3',
+    'ZHE3 ZHU1', 'YE2 YE1 XIE2', 'LIAN2', 'LIAN2', 'SHENG1', 'TING1 TING4', 'NAO3', 'NAO3 NAO4', 'ZHI4 DIE2',
+    'TAI2 YI2 TAI1', 'YU3 YU4 YU2', 'XING1 XING4', 'BAN1 BO1 PAN2 BAN3', 'SE4 SHAI3', 'HUA1',
+    'RUO4 RE3 RE2 RE4', 'YING1 YANG1', 'HUA2 HUA1 HUA4', 'WAN4', 'ZHU4 ZHUO2 CHU2 ZHAO1 ZHAO2 ZHE5',
+    'CHU4 CHU3', 'HAO4 HAO2', 'SUI1', 'XING2 HANG2 XING4 HANG4 HENG2', 'BIAO3', 'BEI4 PI1 BI4 PI4',
+    'ZHUANG1', 'ZHUANG1', 'LI3', 'XI1', 'JIAN4 XIAN4', 'SHI4', 'JUE2 JIAO4', 'GUAN1 GUAN4', 'JIAN4 XIAN4',
+    'GUAN1 GUAN4', 'SHI4', 'JUE2 JIAO4', 'JIE3 JIE4 XIE4', 'YAN2 YAN4 YIN2', 'JI4', 'TAO3', 'JI4', 'SHE4', 'XU3 HU3',
+    'SU4', 'SHI4', 'HUA4', 'GAI1', 'REN4', 'YU3 YU4', 'SHUI2 SHEI2', 'KE4', 'LUN4 LUN2', 'JIANG3', 'XIE4',
+    'SHI5 SHI4 SHI2 ZHI4', 'YI4', 'DU2 DOU4', 'BIAN4', 'RANG4', 'JI4', 'REN4', 'TAO3', 'RANG4', 'YI4', 'JI4', 'JIANG3',
+    'XU3 HU3', 'LUN4 LUN2', 'SHE4', 'SHI4 SHI2 ZHI4', 'SU4', 'SHI4', 'HUA4', 'GAI1', 'YU3 YU4', 'DU2 DOU4',
+    'KE4', 'SHUI2 SHEI2', 'XIE4', 'XIANG4', 'MAO1', 'MAI3', 'FEI4 BI4', 'ZI1 ZI4', 'SAI4', 'FEI4 BI4', 'ZI1', 'SAI4',
+    'ZOU3', 'QI3', 'CHAO1 CHAO3 CHAO4 TIAO4', 'GEN1', 'LU4 LUO4', 'SHEN1 YUAN2 JUAN1', 'CHE1 JU1' , 'JUN1',
+    'JIAO4 JUE2 XIAO4', 'ZHUAN3 ZHUAN4', 'CHE1 JU1', 'ZHUAN3 ZHUAN4', 'JIAO4 JUE2', 'BAN4', 'BIAN1 BIAN5',
+    'YUN4', 'JIN4 JI4', 'JIN4', 'YUAN3 YUAN4', 'LIAN2', 'MI2 MEI4 MI4', 'XUAN3 SUAN4', 'TONG1 TONG4', 'SU4',
+    'ZAO4 CAO4 CAO1', 'LIAN2 LIAN3 LIAN4 LAN4', 'JIN4', 'YUN4', 'YUAN3 YUAN4', 'XUAN3 SUAN4 XUAN4', 'BIAN1',
+    'BU4 POU3', 'ZHONG4 CHONG2 TONG2', 'LIANG4 LIANG2', 'JIN1 JIN4', 'LU4', 'QIAN2 JIAN3', 'CUO4 CU4 XI1',
+    'QIAN2 JIAN3', 'CUO4 CU4', 'CHANG2 ZHANG3 ZHANG4', 'CHANG2 ZHANG3 ZHANG4', 'MEN2', 'KAI1',
+    'JIAN1 JIAN4 JIAN3', 'GUAN1', 'MEN2', 'JIAN1 JIAN4', 'DUI4 SUI4 ZHUI4', 'A1 A4 A5 E1 E3 A3', 'CHEN2 ZHEN4',
+    'CHU2 ZHU4 SHU1', 'CHEN2 ZHEN4', 'DUI4 SUI4 ZHUI4', 'NAN2 NAN4 NUO2', 'SUI1', 'NAN2 NAN4 NUO2',
+    'XU1 NUO4 RUAN3 RU2', 'FEI1 FEI3', 'MIAN4', 'YIN1 YIN4', 'TOU2 TOU5', 'TI2 DI4', 'LEI4 LI4', 'TI2 DI4',
+    'FENG1 FENG3 FENG4', 'FENG1 FENG3 FENG4', 'FEI1', 'FEI1', 'MA3', 'YAN4', 'MA3', 'YAN4', 'TI3 TI1',
+    'GAO1 GAO4', 'FENG4', 'HUANG2', 'DIAN3 ZHAN1 DUO4', 'DANG3 ZHANG3', 'LONG2 LONG3 MANG2',
+    'LONG2 LONG3 MANG2', 'SAN1 SAN4', 'ZHUAN1', 'QIE3 JU1', 'SHI4', 'YE4', 'DONG1', 'LIANG3 LIANG4',
+    'BING4 BANG4', 'ZHU3', 'JIU3', 'YI4', 'HU1 HU2', 'LE4 YUE4 YAO4 LUO4 LIAO2', 'SHU1', 'MAI3', 'SHI4', 'ER4',
+    'WU3', 'XIE1 SUO4 SA1', 'SHI2 SHEN2', 'JIN1', 'CONG2 ZONG4 ZONG1 CONG1', 'DAI4', 'JIAN4', 'REN4 REN2',
+    'FEN4 BIN1', 'CHUAN2 ZHUAN4', 'SI4 SHI4', 'WEI4', 'ZHU4', 'ZUO4 ZUO1 ZUO2', 'SHI3 SHI4', 'BIAN4 PIAN2',
+    'BAO3', 'XIU1', 'HOU4', 'ZUO4', 'BEI4', 'CHUAN2 ZHUAN4', 'XIANG4', 'JIA4 JIE5', 'YUAN2', 'XIONG1', 'XIAN1',
+    'GUANG1', 'ER2 ER5', 'RU4', 'NEI4 NA4', 'QUAN2', 'LIANG3 LIANG4', 'BA1', 'GONG1', 'LIU4 LU4',
+    'GONG4 GONG1', 'GUAN1 WAN1', 'XING1 XING4', 'QI2 JI1', 'ZAI4', 'XIE3', 'JUN1', 'FENG4', 'HUANG2',
+    'FEN1 FEN4', 'ZE2', 'BIE2', 'LI4', 'ZHI4', 'ZE2', 'LI4', 'BAN4', 'GONG1', 'JIA1', 'WU4', 'DONG4', 'DONG4', 'WU4',
+    'HUA4 HUA1', 'BEI3 BEI4', 'QU1 OU1', 'QU1 OU1', 'SHI2', 'HUA2 HUA4 HUA1', 'DAN1 SHAN4 CHAN2', 'NAN2 NA1',
+    'QIA3 KA3', 'JI2', 'QUE4', 'YUAN2 YUAN4', 'CAN1 SAN1 SHEN1 DEN1 CEN1 SAN3',
+    'CAN1 SAN1 SHEN1 DEN1 CEN1', 'YOU4', 'JI2', 'YOU3', 'FAN3 FAN1', 'QU3 QU1', 'SHOU4', 'BIAN4', 'KOU3',
+    'LING4', 'JIAO4', 'TAI2 YI2 TAI1', 'HAO4 HAO2', 'CHI1 JI1', 'GE4', 'HE2 GE3', 'MING2', 'XIANG4', 'FOU3 PI3',
+    'BA5 BA1', 'GAO4', 'YUAN2 YUN4', 'NI2 NE5', 'HE1', 'MING4', 'PIN3', 'HA1 HA3 HA4', 'YUAN2 YUN4',
+    'NA3 NEI3 NA5 NE2', 'A5', 'LA5 LA1', 'O1 WO1', 'XI3', 'DAN1 SHAN4 CHAN2', 'QI4', 'SI4', 'HUI2', 'TU2', 'TU2',
+    'CHANG2 CHANG3', 'XING2', 'CHENG2', 'JI1', 'BAO4', 'CHANG2 CHANG3', 'SHI4', 'SHENG1', 'CHU4 CHU3', 'BEI4',
+    'WAI4', 'MENG4 MENG2', 'TAI4', 'YANG1', 'SHI1', 'TOU2 TOU5', 'QI2 JI1', 'NÜ3 RU3', 'TA1', 'NAI3 NI3', 'SHI3', 'ZI4',
+    'HAI2', 'TA1 TUO1', 'AN1', 'WAN2', 'SHI2', 'SHI4', 'RONG2', 'SHI2', 'XIE3', 'JIANG1 JIANG4 QIANG1',
+    'JIANG1 JIANG4 QIANG1', 'ZHUAN1', 'SHAO3 SHAO4', 'SHAN1', 'CHA4 CHAI1', 'JI3', 'YI3', 'SHI4', 'SHI1', 'XI1',
+    'DAI4', 'SHI1', 'BANG1', 'DAI4', 'CHANG2', 'BANG1', 'PING2', 'JI3 JI1', 'YING4 YING1', 'DU4 DUO2', 'JIAN4', 'KAI1',
+    'SHI4', 'YIN3', 'DI4 TI4', 'ZHANG1 ZHANG4', 'ZHANG1 ZHANG4', 'QIANG2 QIANG3 JIANG4', 'XING2', 'YING3',
+    'CONG2 ZONG4 ZONG1 CONG1', 'BI4', 'KUAI4', 'NIAN4', 'ZEN3', 'SI1 SI4 SAI1', 'XING4', 'GUAI4',
+    'ZONG3 ZONG1', 'NIN2', 'QING2', 'AI4', 'GAN3', 'YING1 YING4', 'HUO4 YU4', 'ZHAN4', 'ZHAN4', 'SHOU3', 'CAI2',
+    'DA3 DA2', 'ZHAO3', 'BA3 BA4', 'TOU2', 'BAO4', 'NA2', 'CHI2', 'ZHI3', 'HUAN4', 'DIAO4', 'JIE1', 'HUAN4', 'ZHI1',
+    'SHOU1', 'GAI3', 'FANG4 FANG3', 'ZHENG4 ZHENG1', 'GU4 GU3', 'JIAO4 JIAO1', 'SHU4 SHU3 CU4 SHUO4',
+    'ZHENG3', 'SHU4 SHU3 CU4 SHUO4', 'LIAO4 LIAO2', 'FANG1 FENG1 PANG2 WANG3', 'RI4 MI4', 'MING2', 'XING1',
+    'GENG4 GENG1', 'SHU1', 'CENG2 ZENG1', 'YUE4', 'PENG2', 'FU2 FU4 BI4', 'WANG4', 'QI1 QI2 JI1', 'WEI4',
+    'QUAN2', 'LI3', 'DONG1', 'BAN3', 'LIN2', 'BIAO1', 'XIAO4 JIAO3 JIAO4 XIAO2', 'YANG2 YANG4 XIANG4', 'GE2 GE1',
+    'AN4', 'DANG3 DANG4', 'MENG4 MENG2', 'YE4', 'LE4 YUE4 YAO4 LUO4 LIAO2', 'BIAO1', 'YANG4 XIANG4',
+    'DANG4 DANG3', 'QUAN2', 'CI4', 'HUAN1', 'GE1', 'HUAN1', 'ZHENG4 ZHENG1', 'CI3', 'SI3', 'MEI3 MEI4',
+    'BI3 BI4 PI2 PI3', 'MIN2', 'QI4 XI4', 'SHUI3', 'QIU2', 'JUE2', 'HUO2 GUO1', 'LIU2', 'HAI3', 'QING1 QING4', 'WAN1',
+    'MAN3 MEN4', 'MAN3 MEN4', 'WAN1', 'DIAN3', 'AI4', 'PIAN4 PIAN1 PAN4', 'BAN3', 'WU4', 'TE4', 'DU2', 'DU2',
+    'WANG2 WANG4 YU4', 'WAN2 WAN4', 'BAN1', 'QIU2', 'LI3', 'YOU2 YAO1', 'NAN2', 'HUA4', 'JIE4', 'LIU2 LIU3 LIU4',
+    'HUA4', 'BAI2 BO2', 'MU4', 'ZHI2', 'XIANG1 XIANG4', 'YAN3 WEN3', 'QI1', 'YAN2', 'LI4 LI2', 'JU3', 'JIU3', 'XI2',
+    'LUAN4', 'LUAN4', 'ZHENG1 ZHENG4', 'YA4 YA1', 'YA4 YA1', 'YI4', 'XIANG3', 'LIANG4', 'QIN1 XIN1 QING4', 'REN2',
+    'JIE4', 'RENG2', 'ZI3 ZAI3', 'FU4', 'LING4 LING2 LING3', 'ZHONG4', 'WEI3', 'SHANG1', 'DI1', 'FO2 FU2', 'JIA1 JIA5',
+    'LI4', 'GONG1 GONG4', 'YI1 YI3', 'XI4', 'JUN4', 'DAO3 DAO4', 'ZHI2 ZHI4', 'JIA3 JIA4 XIA2', 'WEI3', 'TING2',
+    'SHANG1', 'YOU1', 'CHONG1', 'KE4', 'MIAN3', 'LAN2', 'BING1', 'JU4', 'DIAN3', 'YANG3 YANG4', 'LENG3', 'JI2 JI1',
+    'DAO1', 'QIE1 QIE4 QI4', 'LIE4', 'LIU2', 'GANG1', 'CHUANG4 CHUANG1', 'CHU1', 'PAN4', 'KE4', 'JIAN4', 'GANG1',
+    'JU4', 'CHUANG4 CHUANG1', 'HUA4 HUA2', 'JU4', 'LIU2', 'JIAN4', 'ZHU4', 'NU3', 'SHI4', 'SHENG4 SHENG1', 'SHI4',
+    'BAO1', 'YI4 YI1', 'QIAN1', 'SHENG1', 'WU3', 'BAN4', 'XIE2', 'XIE2', 'MAI4', 'BO2', 'WEI4', 'YIN4', 'LI4', 'YA1 YA4',
+    'SHUANG1', 'GU3', 'JU4 GOU1', 'SHI3', 'YOU4', 'XIE2 YE4 SHE4', 'SI1', 'JI2', 'JUN1', 'HAN2', 'WU2', 'YA1 YA5',
+    'DAI1 AI2', 'WU1', 'ZHOU1', 'WEI4', 'HU1 XU1', 'WA1 WA5', 'XIANG3', 'GE1', 'E2 O2 O4', 'AI1 AI4', 'SHOU4',
+    'CHANG4', 'SHANG1', 'QI3', 'SHA4', 'SHAN4', 'WU1', 'MA5', 'XI1', 'HEI1 MO4', 'YAN2', 'LUO1 LOU2', 'TUAN2',
+    'YUAN2', 'YUAN2', 'TUAN2', 'TU3', 'JUN1 YUN4', 'ZUO4', 'KUAI4', 'LEI3 LEI4 LEI2 LÜ4', 'ZHI2', 'TANG2', 'DUI1',
+    'KUAI4', 'JING4', 'ZENG1', 'YA1 YA4', 'LEI3 LEI4 LEI2 LÜ4', 'HUAI4', 'YE4', 'GOU4', 'FU1 FU2', 'ZOU4', 'TAO4',
+    'MA1', 'MEI4', 'JIE3', 'WEI3 WEI1', 'WEI1', 'MA1', 'CUN2', 'SHOU3 SHOU4', 'ZONG1', 'GUAN1', 'YI2', 'BAO3', 'KE4',
+    'XUAN1', 'HAI4 HE2', 'SU4 XIU3 XIU4', 'JI4', 'MI4', 'BAO3', 'XUN2 XIN2', 'DAO3 DAO4', 'FENG1', 'SHE4 YI4 YE4',
+    'XUN2 XIN2', 'DAO3 DAO4', 'ER3', 'SHANG4 CHANG2', 'YOU2', 'JIN3', 'JU2', 'JU1 JI1', 'ZHAN3', 'SHU3 ZHU3',
+    'SHU3 ZHU3', 'SUI4', 'ZUO3', 'QIAO3', 'BA1', 'BU4', 'DI4', 'MU4', 'XING4', 'GAN4 HAN2', 'YAN3 AN1 GUANG3',
+    'DI3 DE5', 'DIAN4', 'FU3', 'ZUO4', 'KANG1', 'CHANG3', 'GUANG3', 'NONG4 LONG4', 'DAN4 TAN2', 'DAN4 TAN2',
+    'GUI1 KUI4', 'CAI3', 'WANG3 WANG4', 'DAI4 DAI1', 'LÜ4', 'FU4 FOU4', 'WEI1 WEI2', 'ZHENG1 ZHI3', 'DE2', 'YI4',
+    'ZHI4', 'WANG4 WANG2', 'MANG2', 'TAI4', 'PA4', 'JI2', 'LIAN4', 'KONG3', 'XI1', 'E4 WU4 WU1', 'BEI1', 'XI1',
+    'E4 WU4 WU1', 'TAI4', 'MAN4', 'HUI4', 'LÜ4', 'YI4', 'DONG3', 'HUAI2', 'LIAN4', 'XI4 XI1 HU1 HUI1', 'XI4 XI1',
+    'FANG2 PANG2', 'BIAN3 PIAN1 BIAN4', 'ZHI2', 'CHENG2 ZHENG3', 'JI4', 'ZHUA1 ZHAO1', 'HU4', 'BAO4',
+    'DAN4 DAN1 DAN3 QIE4', 'LA1 LA2 LA3 LA4', 'ZHAO1 QIAO2 SHAO2', 'BAI4', 'ZE2 ZHAI2', 'AN4', 'SHOU4',
+    'PAI2 PAI3 BEI4', 'KONG4 QIANG1', 'TUI1', 'YUAN2', 'GAO3', 'BO1 BO4 BO3', 'ZE2 ZHAI2', 'JI1 JI2 JI4 XI2',
+    'DAN1 DAN4', 'JU4', 'GONG1', 'XIAO4', 'JIU4', 'BAI4', 'GAN3', 'DUAN4', 'SI1', 'DUAN4', 'SHI1 SHI3 YI2 YI4',
+    'PANG2 BANG4', 'ZU2 ZOU4 COU4', 'JI4 XI4', 'JIU4', 'ZAO3', 'YI4', 'CHUN1 CHUN3', 'ZUO2', 'XIAN3', 'WAN3',
+    'PU3', 'JING3 YING3', 'ZHI4 ZHI1', 'AN4', 'BAO4 PU4 BO2', 'QU1 QU3', 'MU4', 'ZHU2 SHU4',
+    'SHA1 SA4 SHAI4 SHE4', 'ZA2', 'TIAO2', 'YANG2', 'JIA4', 'MOU3', 'CHA2 ZHA1', 'SHU4', 'HE2 HU2', 'GEN1',
+    'MEI2', 'TIAO2', 'JIAN3', 'BANG4', 'YANG2', 'CHU3', 'JI2', 'LOU2', 'GAI4 GUI4 JIE2', 'RONG2', 'GOU4', 'LOU2 LÜ2',
+    'MO2 MU2', 'SHU4', 'JIAN3', 'XIN1', 'YU4', 'QIAN4', 'ZHI3', 'BU4', 'WU3', 'SUI4', 'LI4', 'GUI1 KUI4', 'DUAN4',
+    'SHA1 SA4 SHAI4 SHE4', 'MU3 MU2 WU3 WU2', 'DU2 DAI4', 'BI4', 'MAO2 MAO4', 'YONG3', 'YI4 HAN4', 'JIANG1',
+    'YOU2 YOU4', 'ZHI4 CHI2 YI2', 'KUANG4', 'BO1 BEI1 BI4', 'ZHU4 ZHOU4', 'YANG2 XIANG2 YANG3',
+    'PAI4 MAI4 BAI4 PA1', 'CE4', 'JI4 JI3', 'LANG4 LANG2', 'XIAO1', 'SHEN1', 'CE4', 'HU2', 'YUAN2', 'ZHUN3', 'WEN1',
+    'YAN3 YAN4', 'HAN4 TAN1', 'MAN4 MAN2', 'JI1 JIAO4 JIAO1', 'JI4 JI3 QI2', 'GUAN4 HUAN4', 'HUO3 HUO1', 'DENG1',
+    'LING2 LING4', 'LAN4', 'FAN2', 'RE4', 'ZHAO4', 'FAN2', 'RE4', 'DENG1', 'YING2 CUO1', 'LAN4', 'ZHENG1 ZHENG4',
+    'FU4 FU3', 'SHUANG3 SHUANG1', 'ER3', 'PAI2' , 'NIU2', 'ZHUANG4', 'ZHUANG4', 'KUANG2 JUE2', 'GOU3',
+    'LÜ4 SHUAI4 LÜE4', 'HUAN2', 'QIN2', 'HUAN2 HUAN4', 'SHEN2 SHI2 SHEN4', 'CHAN3', 'CHAN3', 'TIAN2', 'JIA3',
+    'BI4', 'YI4', 'YI2 NI3 NING2', 'BING4', 'TONG4', 'DENG1 DE2', 'BAI3 BO2 MO4', 'JIE1', 'PI2', 'YI4', 'JIN4 JIN3',
+    'SHENG3 XIAN3 XING3', 'ZHONG4', 'SHUI4', 'DU1', 'SHI2 DAN4', 'MA3', 'YING4 GENG3', 'DIE2 SHE2', 'MA3',
+    'CI2', 'SHI4 QI1 ZHI4 SHI2', 'LI3', 'PIAO4 PIAO1', 'FU2 FU4', 'LI3', 'CHENG1 CHEN4 CHENG4',
+    'CHENG1 CHENG4 CHEN4', 'CHUAN1', 'TU1 TU2', 'JING4', 'BI3', 'BI3', 'DA2 DA1', 'CE4', 'QIAN1', 'JIAN3',
+    'JIE2 JIE1', 'PIAN1', 'JIAN3', 'QIAN1', 'JING1 QING2 JING4', 'JI4 JI3', 'YUE1 YAO1 YAO4 DI4', 'HONG2 GONG1 JIANG4',
+    'CHUN2 QUAN2 TUN2 ZHUN1 ZHUN3 ZI1', 'ZHI3', 'SU4', 'XI4', 'SHAO4 CHAO1', 'ZHONG1', 'JUE2', 'LUO4 LAO4',
+    'WEI2 YI2', 'YUAN2 YUAN4', 'BIAN1 BIAN4 BIAN3', 'LIAN4', 'JI4', 'XU4', 'HONG2 HONG1 GONG1', 'YUE1', 'JI4 JI3',
+    'CHUN2 QUAN2 TUN2 ZHUN1 ZHUN3', 'ZHI3', 'LIAN4', 'XI4', 'ZHONG1', 'SHAO4', 'LUO4 LAO4', 'JI4', 'XU4',
+    'WEI2', 'BIAN1 BIAN4', 'YUAN2 YUAN4', 'QUE1', 'LUO1 LUO2 LUO5', 'BA4 BA5 BAI3 PI2', 'ZUI4', 'ZHI4', 'MA4',
+    'BA4 BA5 BAI3 PI2 PI4 BI3', 'LUO2 LUO1 LUO5', 'QUN2', 'XI2', 'FAN1', 'LIAO2 LIU2', 'ZHI2 ZHI4', 'SHENG4',
+    'WEN2 WEN4', 'ZHI2 ZHI4 TE4', 'ROU4 RU4', 'YU4 YO1', 'BEI4 BEI1', 'LIAN3', 'JIAO3 JUE2', 'LIAN3', 'ZHI4 ZHUI4',
+    'JU3', 'JIU4', 'WU3', 'LIANG2 LIANG3', 'YI4', 'JIE2 JIE1', 'KU3 GU3', 'CAO3 ZAO4', 'RONG2', 'MO4 MU4', 'YING2',
+    'YING2', 'LUO4 LA4 LAO4 LUO1', 'YE4 XIE2 SHE4', 'LAN2 LA5', 'JIAN4', 'LAN2 LA5', 'YI4', 'LAN2', 'HU3 HU4', 'LÜ4',
+    'MAN2', 'YING2', 'MAN2', 'XIE3 XUE4', 'ZHONG4', 'SHU4', 'WEI4', 'BU3', 'BU3', 'ZHI4', 'GUI1 KUI1 XU4 GUI4',
+    'QIN1 QING4 XIN1', 'GUI1', 'JIAO3 JUE2 GU3 LU4', 'XUN4', 'ZHU4', 'PING2', 'CI2', 'XIANG2 YANG2', 'CHENG2',
+    'WU4', 'DIAO4 TIAO4 TIAO2 ZHOU1', 'TAN2', 'ZHU1 CHU2', 'WEI4', 'ZHENG4', 'JING3', 'HU4', 'XUN4', 'ZHENG4',
+    'PING2', 'CI2', 'CHENG2', 'XIANG2 YANG2', 'WU4', 'ZHU1', 'DIAO4 TIAO4 TIAO2 ZHOU1', 'TAN2', 'WEI4', 'ZHU1',
+    'FU4', 'ZE2 ZHAI4', 'GUI4', 'TIE1', 'SHANG3', 'MAI4', 'ZHI4 ZHI2', 'FU4', 'ZE2 ZHAI4', 'BAI4', 'ZHI2 ZHI4', 'TIE1',
+    'GUI4', 'SHANG3', 'ZHAO4 TIAO3', 'YUE4 HUO2', 'GAN3', 'ZHAO4 TIAO3 DIAO4', 'QU4 CU4 QU1 COU3 ZOU1',
+    'ZU2 JU4', 'PAO3 PAO2 BO2', 'TIAO4 TIAO2 TAO2 DIAO4', 'RUAN3', 'ZAI4 ZAI3 DAI4 ZAI1 ZI1', 'QING1 QING4',
+    'JI2', 'SHU1 SHU4', 'RUAN3', 'QING1', 'ZAI4 ZAI3', 'JI2', 'SHU1', 'DA2 TI4 TA4', 'YING2 YING4', 'SHU4',
+    'ZHUI1 DUI1 TUI1', 'TUI4', 'SONG4', 'FENG2 PANG2 PENG2', 'ZHOU1', 'YU4', 'YOU2', 'DA2 TA4 TI4',
+    'SHI4 DI2 TI4 ZHE2', 'GUO1 GUO2', 'PEI4', 'JIU3', 'YI1', 'SHI4 YI4', 'SHI4 YI4', 'LI3', 'YE3', 'MING2', 'JIAN4',
+    'ZHONG1', 'TIE3 DIE2', 'ZHONG1', 'TIE3', 'MING2', 'JIAN4', 'WEN2 WEN4', 'FANG2', 'YANG2', 'ZHEN4',
+    'FU4 POU3 BU4 FU1', 'JI4', 'LU4 LIU4', 'XIAN4 WEN3', 'YUAN4', 'ZHEN4', 'XIAN3 YAN2', 'LU4 LIU4', 'YANG2',
+    'SUI2', 'JI4', 'SUI2', 'XIAN3 YAN2 JIAN3', 'ZHI1', 'XIONG2', 'JI2', 'SHUANG1', 'ZA2', 'LI2 LI4 LI3 CHI1 GU3',
+    'YU3 YU4', 'YUN2', 'LEI2 LEI4', 'LING2 LING4', 'QING1 JING1', 'JING4', 'JING4', 'KAO4', 'XIANG3', 'XIANG4',
+    'SHUN4', 'XU1', 'YU4', 'LING3', 'YUAN4', 'GU4', 'XIAN3', 'XIANG4', 'SHUN4', 'XU1', 'GU4', 'YU4', 'LING3',
+    'YANG3 YANG4', 'CAN1 SUN4', 'GUAN3', 'GUAN3', 'SHOU3', 'XIANG1', 'QI2 JI4', 'QI2 JI4', 'GUI3', 'MO2', 'YU2',
+    'YU2', 'NIAO3 DIAO3 DAO3 QUE4', 'NIAO3 DIAO3', 'LI4 LI2', 'MA2 MA1', 'HEI1 HE4', 'QIAO2', 'LIAO3 LIAO4 YAO3',
+    'MAO2', 'YI3 XIAN2', 'DUAN3', 'SHA1', 'KAN3', 'PAO4', 'CHU3', 'SHUO4 SHI2', 'AI4', 'SUI4', 'WAN3', 'BI4',
+    'SHUO4 SHI2', 'PENG4', 'MO2 MO4', 'CHU3', 'AI4', 'ZU3 JIE1', 'ZHU4 ZHOU4 CHU4', 'XIANG2', 'HUO4',
+    'JIN4 JIN1', 'SHAN4 CHAN2', 'HUO4', 'CHAN2 SHAN4 TAN2', 'XIU4', 'SI1', 'QIU1', 'MIAO3', 'MI4 BI4 BIE2',
+    'ZU1 JU1', 'CHENG4 CHENG1 CHEN4 PING2', 'QIN2', 'JI1', 'YI2 CHI3 YI4', 'SHUI4 TUAN4 TUI4 TUO1',
+    'SHAO1 SHAO4', 'SU1', 'WEN3', 'GAO3', 'SU1', 'JI1', 'WEN3', 'QIONG2', 'QIONG2 QIONG1 KONG1',
+    'CHUANG1 CONG1', 'WO1', 'WO1', 'QIONG2', 'JING4', 'TONG2 ZHONG1', 'DUAN1', 'JING4', 'DI2', 'FU2', 'BEN4',
+    'JIN1 QIAN2', 'CHOU2', 'JIAN4', 'XIANG1', 'FAN4', 'ZHU2 ZHU4', 'LAN2', 'LAN2', 'CHOU2 TAO2', 'JI2 JIE4', 'MI3',
+    'FEN3' , 'CU1', 'HU2 HU1 HU4', 'GAO1', 'ZAO1', 'NA4', 'FEN1', 'SUO3', 'JIN3', 'ZI3', 'LEI4 LEI3 LEI2 LÜ4 LIE4',
+    'SI1', 'ZONG1 ZONG4 ZENG4', 'LÜ4 LU4', 'GANG1', 'JIN3', 'XU4', 'HUAN3', 'XIAN4 XUAN2', 'SUO1 SU4',
+    'ZONG4 ZONG3 SONG3 CONG2', 'JI1', 'FAN2 PO2 PAN2', 'ZHI1 ZHI4', 'RAO4 RAO3', 'HUI4 GUI4',
+    'JIAO3 ZHUO2 JIAO4 HE2', 'GANG1', 'NA4', 'ZONG4 ZONG3 SONG3', 'FEN1', 'ZHI1 ZHI4', 'RAO4 RAO3', 'HUI4',
+    'JI1', 'XU4', 'ZONG4 ZONG1 ZENG4', 'HUAN3', 'SUO1 SU4', 'JIAO3 ZHUO2', 'GANG1 HONG2', 'FA2', 'FA2',
+    'SHU3', 'YANG2', 'XIU1', 'YU3 HU4', 'WENG1 WENG3', 'XIANG2', 'QIAO2 QIAO4', 'QIAO2 QIAO4', 'YI4', 'YAO4',
+    'SHUA3', 'NAI4 NENG2', 'HAO4 MAO2 MAO4', 'ER3 RENG2', 'JU4', 'CONG1', 'CONG1', 'DU4 DU3', 'GU3',
+    'FEI2 BI3', 'JIAN1 XIAN2', 'KEN3', 'DAN3 TAN2 TAN3 DA2', 'TAI1', 'PANG4 PAN2 PAN4', 'BAO1 PAO2 PAO4', 'HU2',
+    'XIONG1', 'CUI4', 'TUO1 TUI4', 'YAO1', 'TUI3', 'DAN3', 'WO4', 'LIN2 LIN4', 'CHOU4 XIU4', 'SHE4 SHE3 SHI4',
+    'SHU1 YU4', 'ZHOU1', 'HANG2', 'JIAN4', 'CHUAN2', 'JIAN4', 'AI4 YI4', 'FEN1 FEN2', 'FANG1', 'CANG1 CANG3',
+    'SU1', 'MANG2 HUANG3', 'CHA2', 'HUANG1 HUANG3 KANG1', 'YAO4 YUE4', 'HE2 HE4 KE1 HE1', 'LI4 LI2 CHI2',
+    'ZHUANG1', 'SHA1 SUO1 SUI1', 'LAI2', 'LIAN2', 'HUO4', 'CAI4', 'PU2 BEI4 BU4 BO2', 'FEI1 FEI3 FEI4', 'LAI2',
+    'XIAO1', 'SA4', 'GE2 GE3', 'JIANG3 JIANG1', 'MENG2 MENG1 MENG3 MANG2', 'CANG1 CANG3', 'GAI4 GE3 HE2',
+    'LIAN2 LIAN3', 'CAI4 SA4 CA1', 'JIANG3 JIANG1', 'XIAO1', 'BO2 BAO2 BO4 BU4', 'SA4', 'XIN1', 'JIE4 JI2',
+    'CANG2 ZANG4 ZANG1', 'TENG2', 'YAO4 YUE4 SHUO4 LÜE4', 'SU1 SU4', 'XU1', 'KUI1', 'DAN4', 'WA1 JUE2',
+    'FENG1', 'MI4', 'DIE2 TIE1', 'RONG2', 'CHONG2', 'XIE4', 'XIE1', 'JIE1', 'CHONG1 CHONG4', 'HENG2', 'YI1 YI4',
+    'DAI4', 'CAI2', 'LIE4 LIE3', 'YU4', 'KU4', 'FU4', 'KU4', 'FU4', 'LAN3 LAN4', 'LAN3', 'CHU4', 'DING4', 'TUO1', 'FANG3',
+    'ZHENG4', 'XUN2', 'SHI1', 'KUA1', 'YU4', 'ZHI4', 'SHI4', 'DAN4', 'YI4 YI2', 'LIANG4 LIANG2', 'NUO4', 'MOU2', 'PU3',
+    'YI4', 'YU4', 'ZAN4', 'DING4', 'FANG3', 'YI4', 'SHI1', 'DAN4', 'XUN2', 'NUO4', 'LIANG4 LIANG2', 'YI2 YI4', 'MOU2',
+    'PU3', 'GU3 YU4 LU4', 'DOU4', 'QI3 KAI3', 'FENG1', 'HAO2', 'MAO4', 'BEI4', 'ZHEN1', 'CAI2', 'GONG4', 'HUO4',
+    'TAN1', 'GUAN4 WAN1', 'HE4', 'BIN1 BIN4', 'CI4 SI4', 'XIAN2', 'JIAN4', 'FU4', 'DU3', 'LAI4', 'ZHUAN4 ZUAN4',
+    'GOU4', 'ZENG4', 'ZAN4', 'YING2', 'BEI4', 'ZHEN1', 'GONG4', 'CAI2', 'XIAN2', 'HUO4', 'TAN1', 'GOU4',
+    'GUAN4 WAN1', 'JIAN4', 'HE4', 'FU4', 'DU3', 'SI4 CI4', 'LAI4', 'ZHUAN4', 'ZAN4', 'ZENG4', 'YING2', 'CHI4',
+    'QU1 CU4', 'QU1 CU4 QU4 COU3', 'YUE4', 'DIE1 DIE2 TU2', 'JU4', 'JI1 JI4', 'TA4 TA1', 'TI1 DIE2', 'JI1 JI4', 'ZONG1',
+    'YUE4 TI4', 'DUO3', 'GUI3', 'XUAN1 XIAN3 XIAN4 HAN3 JIAN1', 'FU3', 'LIANG4', 'HUI1', 'BEI4', 'LUN2', 'HONG1',
+    'GUI3', 'XUAN1', 'LUN2', 'HONG1', 'FU3', 'LIANG4', 'BEI4', 'HUI1', 'XIN1', 'CI2', 'BIAN4 BAN1 BAN4 BIAN3 PIAN4',
+    'BIAN4 PIAN2', 'CI2', 'BIAN4 PIAN2 BIAN3 BAN4', 'RU3 RU4', 'NONG2', 'QIAN1 GAN1', 'XUN4', 'MAI4', 'WEI2',
+    'CHI2 ZHI2', 'DI2', 'PO4 PAI3', 'HUI2', 'TAO2', 'NI4', 'XUN4', 'TOU4 SHU1', 'ZHU2 DI2 ZHOU4 TUN2', 'TU2',
+    'GUANG4 KUANG2', 'SHI4', 'YI4', 'LUO2 LUO4', 'BI1', 'BIAN4', 'WEI2 HUI2', 'YI2 WEI4', 'YAO2', 'XUN4', 'ZAO1',
+    'CHI2 ZHI4 XI1 ZHI2', 'QIAN1', 'YI2 WEI4 SUI2', 'BI4', 'YAO1', 'MAI4', 'LUO2 LUO4', 'BANG1',
+    'XIE2 XU2 YA2 YE2 YU2 SHE2', 'YOU2', 'QIU1', 'LIN2', 'LANG2 LANG4', 'ZHENG4', 'YOU2 CHUI2',
+    'XIANG1 XIANG3 XIANG4', 'ZHENG4', 'LIN2 LIN4', 'KU4', 'SUAN1', 'ZUI4', 'XING3 XING1 CHENG2 JING1', 'CHOU3',
+    'CAI3 CAI4', 'ZHEN1', 'DIAO4', 'LING2', 'YIN2', 'RUI4 DUI4 YUE4', 'XIAO1', 'FENG1', 'GANG1 GANG4', 'JIN3',
+    'GUO1 GUO3', 'ZHONG1', 'SUO3', 'ZHEN4 ZHEN1 TIAN2', 'JING4', 'JIAN4', 'ZHEN1', 'DIAO4', 'GANG1 GANG4',
+    'QIN1', 'LING2', 'YIN2', 'XIAO1', 'SUO3', 'GUO1', 'FENG1', 'JIN3', 'ZHONG1', 'ZHEN4', 'JING4', 'SHAN3', 'BI4',
+    'XIAN2 JIAN1 JIAN4', 'GE2', 'YUE4', 'BAN3', 'KUO4', 'CHAN3', 'SHAN3', 'BI4', 'MEN4 MEN1', 'NAO4', 'GE2',
+    'CHAN3', 'KUO4', 'YIN1 YIN4 AN1', 'JIE1', 'ZU3 ZHU4', 'TUO2 DUO4', 'JIANG4 XIANG2 XIANG4', 'PEI2',
+    'YIN1 YIN4 AN1', 'LING2', 'XIAN4', 'LONG2 LONG1', 'JIE1', 'YIN3 YIN4', 'GE2 RONG3 JI1', 'ZHANG4 ZHANG1',
+    'YIN3 YIN4', 'YA3 YA1 YA2', 'JI1', 'XUE3', 'LI4', 'LING2 LIAN2', 'WU4', 'ZHEN4 SHEN1', 'WU4 MENG2', 'LU4 LOU4',
+    'BA4 PO4', 'PI1', 'LI4', 'JING4 JING1', 'GE2 JI2 JI3', 'XIE2 WA1', 'HAN2', 'HAN2', 'YUN4', 'YE4 XIE2', 'DING3',
+    'WAN2 KUN1', 'DUN4 DU2 ZHUN1', 'PO1 PO3 PO4 PI2', 'PIN2 BIN1', 'KE1 KE3 KUAN3', 'E2', 'YAN2 YA2', 'YE4',
+    'DING3', 'WAN2', 'DUN4 DU2 ZHUN1', 'PO3 PO1', 'PIN2 BIN1', 'KE1 KE3 KUAN3', 'E2', 'PIAO1', 'PIAO1',
+    'SHI2 SI4 YI4', 'FAN4', 'YIN3 YIN4', 'BAO3', 'SHI4 CHI4', 'BING3', 'YU2 YE2', 'FAN4', 'YIN3 YIN4', 'SHI4', 'BAO3',
+    'BING3', 'ZHU4', 'JIA4 JIA1', 'SHI3', 'PIAN4', 'SAO1 SAO3 XIAO1', 'QU1', 'JING1', 'QU1', 'SHI3', 'ZHU4', 'JIA4',
+    'PIAN4', 'SAO1 SAO3', 'GU3 GU1 GU2', 'FA4 FA3', 'SONG1', 'DOU4', 'NAO4', 'YU4', 'HUN2', 'MEI4', 'LU3 LÜ3',
+    'XIAN1 XIAN3 XIAN4', 'LU3', 'XIAN1 XIAN3 XIAN4', 'MING2', 'HONG2 HONG4', 'E2', 'YING1', 'MING2', 'HONG2',
+    'E2', 'YING1', 'LU4 LÜ2', 'MAI4', 'MAI4', 'MIAN4', 'LI2', 'MO4', 'GU3', 'SHU3', 'BI2', 'QI2 JI1 JI4 JIAN3 ZHAI1 ZI1',
+    'ZHAI1', 'QI2 JI1 JI4 JIAN3 ZHAI1 ZI1', 'CHI3', 'LING2', 'CHI3', 'LING2', 'GUI1 JUN1 QIU1', 'GUI1 JUN1 QIU1',
+    'DING1 ZHENG1', 'ZHANG4', 'JI1', 'BING3', 'SI1', 'DIU1', 'DIU1', 'CHUAN4 GUAN4', 'LIN2 LIN4', 'WAN2', 'DAN1',
+    'NAI3', 'YAO1 MO5 ME5 MA5 MO3', 'WU1 WU4', 'FA2', 'QIAO2', 'GUAI1', 'CHENG2 SHENG4', 'YI3',
+    'XIANG1 XIANG3 XIANG4', 'GAN1 QIAN2', 'YU2 YU3', 'YU2 XU1', 'YU2 KUI1', 'YUN2', 'HU4', 'JING3', 'WANG2 WU2',
+    'HENG1 XIANG3 PENG1', 'JING1', 'YI4', 'JIN3 JIN4', 'CHOU2 QIU2', 'XIAN1', 'YI2', 'YANG3 YANG4 ANG2', 'ZHONG4',
+    'QI3', 'YI1', 'WU3', 'XIU1', 'HUO3 HUO5', 'LUN2', 'BO2 BAI3 BA4', 'GU1 GU3 GU4', 'BAN4 PAN4', 'SHEN1', 'BU4',
+    'ZHAN4', 'YU2 XU2', 'PEI4', 'XIA2', 'ZHEN1 ZHENG1', 'CE4 ZE4', 'QIAO2', 'HOU2 HOU4', 'QIN1', 'CU4', 'SU2',
+    'XIA2', 'JU4', 'BEI4', 'YI3', 'JIE4', 'LUN2', 'QING1', 'PIAN1', 'JIAN4', 'CE4 ZE4', 'ZHEN1 ZHENG1', 'OU3', 'TOU1',
+    'JIE2', 'JIA1', 'AO4', 'SHA3', 'QING1', 'JIN3 JIN4', 'QIAO2', 'YI2', 'YI4', 'RU2', 'JIN3', 'YUN3', 'XIONG1', 'TU4', 'XI1',
+    'JIAN1', 'SHOU4', 'CE4', 'MAO4 MOU4 MO4', 'NONG2', 'GUAN1 GUAN4', 'DONG1', 'BING1 NING2', 'CHONG1',
+    'ZHUN3', 'LING2', 'NING2', 'FAN2', 'PING2', 'KAI3', 'KAI3', 'HAN2', 'KAN1', 'SHAN1', 'SHUA1 SHUA4', 'CI4 QI4',
+    'SHENG4', 'JIAN3', 'FU4', 'GE1', 'QUAN4', 'JIE2', 'LI4', 'JING4 JIN4', 'LAO2 LAO4', 'JIN4 JING4', 'YONG3', 'MIAN3',
+    'LE4 LEI1', 'LAO2 LAO4', 'QIN2', 'LI4', 'QUAN4', 'WU4', 'ZU2 CU4', 'WEI1 WEI2', 'JUAN4 QUAN2', 'TING1', 'LI4',
+    'YAN4 YA1 YAN1', 'HOU4', 'YAN4 YA1 YAN1', 'LI4', 'XIAN4 XUAN2', 'SHU1', 'ZHAO4 SHAO4', 'BA1 BA5', 'TAN4',
+    'DIAO4', 'HOU4', 'TU3 TU4', 'XIA4 HE4', 'LIN4', 'YIN2', 'CHAO3', 'XI1', 'CHUI1 CHUI4', 'WU2', 'LÜ3', 'KA1 GA1',
+    'YI2', 'LIE3 LIE5', 'MI1', 'YAO3 JIAO1', 'ZAN2 ZA2', 'AI1', 'ZAI1', 'AI1', 'LI1 LI5 LI3', 'KU1', 'ZHE2', 'TANG2', 'HU3',
+    'WEI2 WEI3', 'YO1', 'NIAN4', 'FEI1 PEI1', 'PA1', 'WEI4', 'LA3', 'HAN3', 'HE1 HE4', 'QIAO2', 'MIAO1', 'PEN1 PEN4',
+    'HAI1 HAI3', 'TAN4', 'JIA1', 'CHANG2', 'ZUI3', 'PEN1 PEN4', 'XIA4 HE4', 'KUN4', 'WEI2', 'GU4', 'YUAN2',
+    'QUAN1 JUAN4', 'WEI2', 'YUAN2', 'JI2 JI1', 'ZHI3', 'JIAN1', 'PO1', 'KUN1', 'TAN3', 'PING2', 'LA1 LA5', 'YU4',
+    'PEI2 POU3', 'JIAN1', 'DUO4 HUI1', 'KAN1', 'TA3', 'TU2', 'SAI1 SE4 SAI4' , 'TIAN2', 'CHEN2', 'MO4', 'DUO4 HUI1',
+    'BI4', 'ZHUANG4', 'ZHUANG4', 'SHOU4', 'XIA4 JIA3', 'XI1 XI4', 'HUO3', 'JIA1 JIA2', 'DUO2', 'JIA1 JIA2', 'NAI4',
+    'FENG4', 'FEN4', 'QI4 QIE4 XIE4', 'BEN1 BEN4', 'AO4 YU4', 'DUO2', 'FEN4', 'NAI3', 'FU4', 'MIAO4', 'TUO3',
+    'FANG2 FANG1', 'NI1 NI2', 'QI1 QI4', 'MU3', 'ZI3', 'GU1', 'XING4', 'ZI1', 'WA2', 'NIANG2', 'PO2', 'HUN1', 'FU4',
+    'MEI2', 'XIAN2', 'KONG3', 'SUN1 XUN4', 'XIAO4', 'MENG4', 'JI4', 'GU1', 'SUN1 XUN4', 'YU3', 'SONG4', 'HONG2',
+    'ZHOU4', 'SHEN3', 'XIAN4', 'GONG1', 'KUAN1', 'BIN1 BIN4', 'JI4', 'FU4', 'HAN2', 'QIN3', 'MO4', 'CHA2', 'QIN3',
+    'NING2 NING4 ZHU4', 'SHEN3', 'KUAN1', 'SHOU4', 'ZUN1', 'JIAN1', 'CHEN2', 'CHANG2', 'CHI3 CHE3', 'NI2',
+    'WEI3 YI3', 'PI4', 'CENG2', 'JIE4', 'WU1', 'PING2 BING3 BING4', 'TU2', 'CENG2', 'QI3 KAI3', 'LAN2', 'DAO3', 'AN4',
+    'FENG1', 'DAO3', 'CHONG2', 'LAN2', 'LING3', 'CHUAN1', 'ZHOU1', 'XUN2', 'JU4', 'WU1 WU2', 'XIANG4 HANG4',
+    'BI4', 'SHUAI4 SHUO4', 'ZHANG4', 'SHUAI4 SHUO4', 'XI2', 'ZHANG4', 'MAO4', 'FU2', 'BI4', 'GAN1 GAN4 HAN2',
+    'HUAN4', 'YOU4 YAO4', 'YOU1', 'QING4', 'CHUANG2', 'XU4', 'KU4', 'FEI4', 'KU4', 'TING2 TING4', 'YONG1 YONG2',
+    'LIAN2', 'LIAO4', 'FEI4', 'TING1', 'YAN2', 'TING2', 'QI4', 'HONG2', 'MI2', 'XIAN2', 'WAN1', 'RUO4', 'MI2', 'WAN1',
+    'YAN4', 'BIN1', 'PENG2', 'ZHANG1', 'YI4', 'CHE4', 'BI3', 'ZHENG1', 'JING4', 'XU2', 'JING4', 'TU2', 'CHE4', 'JI4',
+    'REN3', 'ZHONG1', 'YOU1', 'HU1', 'NU4', 'BU4', 'YI2', 'YUAN4', 'HENG2', 'HUI1', 'CHI3', 'HEN4', 'EN1', 'GONG1',
+    'QIA4', 'NAO3', 'YUE4', 'XI1', 'HUI3', 'WU4', 'YOU1', 'MEN4 MEN1', 'HUO4', 'HUI4', 'JU4', 'CAN3', 'GUAN4', 'NAO3',
+    'RE3', 'CHOU2', 'YU4', 'YU2 TOU1', 'YU2', 'CI2', 'MU4', 'CAN3', 'GUAN4', 'WEI4', 'QING4', 'YU4', 'YOU1', 'LIAN2',
+    'PING2', 'XIAN4', 'HAN4', 'LAN3', 'LAN3', 'JU4', 'JIE4', 'JIE2', 'DAI4', 'HU4', 'SHAN4 SHAN1', 'TUO1', 'KOU4', 'KUO4',
+    'SAO3 SAO4', 'YANG2', 'CHE3', 'PI1', 'CHAO1', 'KANG4 KANG2', 'ZHE2 SHE2 ZHE1', 'QIANG3 QIANG1 CHENG1',
+    'PI1', 'TAI2', 'DI3', 'MO3 MA1 MO4', 'CHOU1', 'CHAI1 CA1 CHE4', 'PAO1', 'PAI1 BO2 PO4', 'JU4 JU3', 'BA2 BEI4',
+    'TUO1', 'NI3' , 'YONG3 YONG1', 'BO1 FA2', 'KUO4 GUA1', 'QUAN2', 'PIN1', 'SHI2 JIE4 SHE4', 'TIAO1 TIAO3 TAO1',
+    'WA1', 'DANG3 DANG4 TANG3', 'JI3', 'HUI1', 'ZHEN4 ZHEN1 ZHEN3', 'TING3', 'JUAN1 YUAN2', 'BU3', 'SUN3',
+    'JIAN3 LIAN4', 'SHE3', 'JUAN3 QUAN2', 'JIE2 QIE4', 'SAO3 SAO4', 'ZHANG3', 'GUA4', 'CAI3', 'TAN4 TAN1',
+    'CUO4 ZE2', 'MIAO2', 'CHA1', 'YANG2', 'WO4', 'HUI1', 'SUN3', 'YAO2', 'BAN1', 'DA1 TA4',
+    'QIANG3 QIANG1 CHENG1', 'SHE4 NIE4', 'BAI3', 'ZHAI1 ZHE2', 'MO2 MA1', 'MO1 MO2', 'CHENG1',
+    'ZHUANG4 CHUANG2', 'BO1 FA2', 'JIAN3 LIAN4', 'YONG1 YONG3', 'DANG3 DANG4 TANG3', 'CAO1 CAO4',
+    'QING2', 'JI3', 'CA1', 'NI3', 'KUO4', 'BAI3', 'RAO3 ROU2', 'SHE4 NIE4', 'DI2', 'MIN3', 'BI4', 'SAN4 SAN3',
+    'DUN1 DUI4 DIAO1 DUI1 TUAN2 TUN2', 'JING4', 'DI2', 'ZHAI1', 'DOU3 DOU4', 'LÜ3', 'XUAN2 XUAN4', 'QI2', 'DAN4',
+    'XU4', 'SHENG1', 'CHANG1', 'HUN1 MIN3', 'YING4', 'ZHAO1', 'XIAO3', 'CHEN2', 'QING2', 'JING1', 'ZAN4', 'SHU3',
+    'NUAN3 XUAN1', 'ZAN4', 'XIAO3', 'YUE1', 'MAN4 MAN2', 'TI4', 'LANG3', 'ZHAO1 CHAO2 ZHU1', 'MO4',
+    'ZHU1 SHU2', 'DUO3', 'CAI2', 'CUN1', 'DU4', 'SHU4', 'BEI1', 'SONG1', 'XI1', 'ZHI1 QI2', 'SHU1',
+    'QIANG1 CHENG1', 'FENG1', 'BAI3 BO2 BO4', 'RAN3', 'ROU2', 'LIU3', 'LAN2 LIAN4', 'TAO2', 'ZHUO1', 'SANG1',
+    'QIAO2', 'LIANG2', 'TI1 TI2', 'XIE4 JIE4', 'QI4', 'QI2 JI1', 'PENG2', 'SEN1', 'YI3 YI1', 'ZHI2', 'YE2 YE1', 'FENG1',
+    'BANG3 BANG4 BENG1 PANG2', 'QIANG1 CHENG1', 'SHU1', 'QIAO2', 'HENG2 HENG4', 'LAN2 LIAN4', 'OU1 OU3',
+    'QI1', 'QIN1 QIN4 YIN2', 'KUAN3 XIN1', 'OU1 OU3', 'SHU1', 'CAN2', 'CAN2', 'KE2 QIAO4', 'HUI3 HUI4', 'YI4',
+    'HAO2', 'SHI4 ZHI1 JING1', 'RU3', 'CHI2 TUO2 CHE4', 'WU1 WU4 WA1 YU1', 'TANG1 TANG4 SHANG1 YANG2',
+    'WANG1 WANG3 HONG2', 'QI4 GAI1 YI3', 'CHEN2 SHEN3 TAN2', 'CHEN2', 'CHONG1', 'SHA1 SHA4 SUO1', 'GOU1',
+    'CANG1', 'HE2', 'YAN2 YAN4', 'QUAN2', 'PAO4 PAO2 PAO1', 'NI2 NI4 NI3 NIE4 NING4', 'TAI4', 'YONG3',
+    'ZE2 DUO2 SHI4 YI4', 'XI3 XIAN3', 'LUO4', 'DONG4 TONG2', 'XIE4', 'HONG2', 'ZHOU1', 'QIA4 HE2 XIA2', 'QIAN3',
+    'NONG2', 'HAO4 GE2 GAO3', 'FU2', 'SHE4 DIE2', 'TAO1 TAO2', 'ZHANG3 ZHANG4', 'YA2', 'YE4 YI4 SHI4',
+    'HAN2 HAN4' , 'LIANG2 LIANG4', 'SHU2 SHU1 CHU4', 'LEI4 LI4', 'DAN4 TAN2 YAN3 YAN4', 'JING4',
+    'HUN4 HUN3 HUN2 GUN3 KUN1', 'QIAN3 JIAN1 JIAN4 CAN2 ZAN4', 'JIAN4 JIAN1 CHAN2 QIAN2', 'JIAN3', 'DU4',
+    'GANG3 HONG4', 'YOU2 LIU2', 'TANG1 TANG4 SHANG1 YANG2', 'GOU1 GANG3 KOU4', 'XI1 QI1', 'CANG1', 'MIE4',
+    'ZI1 CI2', 'HUA2 GU3', 'LAN4', 'DI1', 'GUN3', 'PIAO1 PIAO3 PIAO4 BIAO1', 'LOU4 LOU2',
+    'ZHANG3 ZHANG4 ZHANG1', 'JIAN4 CHAN2 JIAN1 QIAN2', 'JIE2', 'QIAN2', 'QIAN2', 'CHAO2', 'ZE2 DUO2 SHI4 YI4',
+    'NONG2', 'TAO1 TAO2 CHAO2 SHOU4 DAO4', 'LAN4 JIAN4 LAN3 LAN2', 'MIE4', 'HUI1', 'ZAI1', 'LU2',
+    'YAN2 YAN4 TAN2', 'PAO4 BAO1 PAO2', 'ZHA4 ZHA2', 'LIE4', 'WU1 WU4', 'KAO3', 'SHAO1', 'JIAO1 QIAO2',
+    'YAN1', 'SHA1 SHA4', 'XIONG2', 'SHU2 SHOU2', 'RAN2', 'SHAO1 SHAO4', 'BAO4 BO2', 'LU2'
+    );
+	foreach ($tmp as $str)
+	{
+		echo $str.' → ';
+		$romanized = new romanization($str, 'pinyin');
+		echo $romanized->ROMAN.'<br/>';
+	}
+}
+
+?>
