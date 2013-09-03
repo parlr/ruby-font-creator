@@ -10,8 +10,8 @@
 inputFile="${1:-./unihan/Unihan/Unihan_Readings.txt}"
 outputFile="${2:-./unihan/unicode-pinyin.csv}"
 
-rm  "$outputFile"
 
+[[ -e "$outputFile" ]] && rm  "$outputFile"
 
 while read -r unicode field pinyin;
 do
