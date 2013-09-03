@@ -19,3 +19,6 @@ rm Unihan{.zip,} -rf && wget http://www.unicode.org/Public/UCD/latest/ucd/Unihan
 
 # Extract latest version
 for f in *.zip; do unzip "$f"; done
+  cd ../saxon
+  wget http://sourceforge.net/projects/saxon/files/latest/download?source=files -O saxon-HE.zip
+  unzip -o saxon-HE.zip
