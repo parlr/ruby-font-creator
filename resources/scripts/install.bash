@@ -7,15 +7,16 @@
 #
 # @author: Édouard Lopez <dev+hpf@edouard-lopez.com>
 
-scriptDir="$(dirname "$0")" # emplacement du script
-cd "$scriptDir"
+(
+  scriptDir="$(dirname "$0")" # emplacement du script
+  cd "$scriptDir"
 
-cd ../unihan
+  cd ../unihan
 
-# clean previous files
-rm Unihan{.zip,} -rf && wget http://www.unicode.org/Public/UCD/latest/ucd/Unihan.zip
-# rm ucd.all.flat.* && wget http://www.unicode.org/Public/UCD/latest/ucdxml/ucd.all.flat.zip
-# rm ucd.all.grouped.* && wget http://www.unicode.org/Public/UCD/latest/ucdxml/ucd.all.grouped.zip
+  # clean previous files
+  wget http://www.unicode.org/Public/UCD/latest/ucd/Unihan.zip
+  wget http://www.unicode.org/Public/UCD/latest/ucdxml/ucd.all.flat.zip
+  wget http://www.unicode.org/Public/UCD/latest/ucdxml/ucd.all.grouped.zip
 
   # Extract latest version
   for f in *.zip; do
@@ -26,3 +27,4 @@ rm Unihan{.zip,} -rf && wget http://www.unicode.org/Public/UCD/latest/ucd/Unihan
   cd ../saxon
   wget http://sourceforge.net/projects/saxon/files/latest/download?source=files -O saxon-HE.zip
   unzip -o saxon-HE.zip
+)
