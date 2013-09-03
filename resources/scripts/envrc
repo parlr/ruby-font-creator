@@ -11,6 +11,10 @@
 scriptDir="$(dirname "$0")" # emplacement du script
 resourcesDir="${scriptDir%/*}"
 
+# Saxon
+HPF_SAXON_DIR=="$resourcesDir/saxon"
+HPF_SAXON_JAR=="$HPF_SAXON_DIR/saxon9he.jar"
+
 HPF_UNIHAN_READING="$resourcesDir/unihan/Unihan/Unihan_Readings.txt"
 HPF_UNIHAN_READING_SHORT="$resourcesDir/unihan/unicode-pinyin.csv"
 HPF_TPL_DIR="$resourcesDir/tpl"
