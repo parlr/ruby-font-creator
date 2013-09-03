@@ -10,3 +10,4 @@ resources/unihan/Unihan.zip
 resources/svg/*.svg
 resources/svg-font/*.svg
 resources/svg-text/*.svg
+resources/saxon/*
