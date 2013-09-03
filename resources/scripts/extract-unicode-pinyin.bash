@@ -7,9 +7,12 @@
 #
 # @author: Édouard Lopez <dev+hpf@edouard-lopez.com>
 
-inputFile="${1:-./unihan/Unihan/Unihan_Readings.txt}"
-outputFile="${2:-./unihan/unicode-pinyin.csv}"
+scriptDir="$(dirname "$0")" # emplacement du script
+. "$scriptDir"/envrc # project variables
 
+
+inputFile="${1:-"$HPF_UNIHAN_READING"}"
+outputFile="${2:-"$HPF_UNIHAN_READING_SHORT"}"
 
 [[ -e "$outputFile" ]] && rm  "$outputFile"
 

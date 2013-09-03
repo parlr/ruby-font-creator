@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# DESCRIPTION
+#   Declare project variable to be used by other scripts
+#
+# USAGE
+#   Other script need to include this file:
+#     . envrc
+#
+# @author: Édouard Lopez <dev+project@edouard-lopez.com>
+
+scriptDir="$(dirname "$0")" # emplacement du script
+resourcesDir="${scriptDir%/*}"
+
+HPF_UNIHAN_READING="$resourcesDir/unihan/Unihan/Unihan_Readings.txt"
+HPF_UNIHAN_READING_SHORT="$resourcesDir/unihan/unicode-pinyin.csv"
+HPF_SVG_DIR="$resourcesDir/svg"
+HPF_SVGTEXT_DIR="$resourcesDir/svg-text"
+HPF_SVGFONT_DIR="$resourcesDir/svg-font"
+HPF_TPL_DIR="$resourcesDir/tpl"
+HPF_TPL_SVGTEXT="$resourcesDir/tpl/svg.text-x###.svg.tpl"
+HPF_TPL_SVGPATH="$resourcesDir/tpl/svg.path-x###.svg.tpl"
+HPF_TPL_DIR="$resourcesDir/tpl"
+HPF_SVGFONT_DIR="$resourcesDir/svg-font"
