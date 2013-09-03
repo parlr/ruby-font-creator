@@ -15,15 +15,20 @@ resourcesDir="${scriptDir%/*}"
 HPF_SAXON_DIR=="$resourcesDir/saxon"
 HPF_SAXON_JAR=="$HPF_SAXON_DIR/saxon9he.jar"
 
-HPF_UNIHAN_READING="$resourcesDir/unihan/Unihan/Unihan_Readings.txt"
-HPF_UNIHAN_READING_SHORT="$resourcesDir/unihan/unicode-pinyin.csv"
+# Unihan Resources
+HPF_UNIHAN_DIR="$resourcesDir/unihan"
+HPF_UNIHAN_READING="$HPF_UNIHAN_DIR/unihan/Unihan_Readings.txt"
+
+# Templates
 HPF_TPL_DIR="$resourcesDir/tpl"
 HPF_TPL_SVGTEXT="$resourcesDir/tpl/svg.text-x###.svg.tpl"
 HPF_TPL_SVGPATH="$resourcesDir/tpl/svg.path-x###.svg.tpl"
-HPF_TPL_DIR="$resourcesDir/tpl"
-HPF_SVGFONT_DIR="$resourcesDir/svg-font"
+
 # SVG
 HPF_SVG_DIR="$resourcesDir/svg"
 HPF_SVGTEXT_DIR="${HPF_SVG_DIR}-text"
 HPF_SVGFONT_DIR="${HPF_SVG_DIR}-font"
 
+# TMP
+HPF_TMP_DIR="$resourcesDir/tmp"
+HPF_UNIHAN_READING_SHORT="$HPF_TMP_DIR/unihan/unicode-pinyin.csv"
