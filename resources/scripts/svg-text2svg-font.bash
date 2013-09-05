@@ -19,6 +19,8 @@ XVFB_PID=$!
 echo $XVFB_PID > ./xvfb.pid
 export DISPLAY=":8"
 
+printf "Removing existing SVG-font files…\n"
+rm "$HPF_SVGFONT_DIR"/*.svg
 
 # cp 㐀-x3400.svg test-union-cli.svg; inkscape -z -f test-union-cli.svg --select=hanzi --select=pinyin --verb=SelectionUnion --verb=FileSave --verb=FileClose
 
