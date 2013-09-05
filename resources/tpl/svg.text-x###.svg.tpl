@@ -27,6 +27,33 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
+  <defs
+     id="defs5498">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 500 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="1000 : 500 : 1"
+       inkscape:persp3d-origin="500 : 333.33333 : 1"
+       id="perspective3931" />
+    <font
+       horiz-adv-x="1024"
+       id="font3933"
+       inkscape:label="Hanzi-Pinyin Font">
+      <font-face
+         units-per-em="1024"
+         id="font-face3935"
+         font-family="Hanzi-Pinyin Font" />
+      <missing-glyph
+         d="M0,0h1000v1024h-1000z"
+         id="missing-glyph3937" />
+      <glyph
+         id="font-glyph"
+         glyph-name="NAME"
+         unicode="UNICODE_GLYPH"
+         d="" />
+    </font>
+  </defs>
   <text
      xml:space="preserve"
      style="font-size:800px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
