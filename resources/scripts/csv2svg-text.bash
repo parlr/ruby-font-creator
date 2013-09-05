@@ -13,7 +13,7 @@ scriptDir="$(dirname "$0")" # emplacement du script
 inputFile="${2:-"$HPF_UNIHAN_READING_SHORT"}"
 
 # Empty directory svg-text/
-rm "$HPF_SVGTEXT_DIR"/*
+for f in "$HPF_SVGTEXT_DIR"/*; do rm "$f"; done
 
 while IFS=';' read -r unicode hanzi pinyin;
 do
