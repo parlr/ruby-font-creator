@@ -22,6 +22,24 @@ export DISPLAY=":8"
 printf "Removing existing SVG-font files…\n"
 rm "$HPF_SVGFONT_DIR"/*.svg
 
-# cp 㐀-x3400.svg test-union-cli.svg; inkscape -z -f test-union-cli.svg --select=hanzi --select=pinyin --verb=SelectionUnion --verb=FileSave --verb=FileClose
+for f in "$HPF_SVGTEXT_DIR"/*.svg;
+do
+  nf="$HPF_SVGFONT_DIR/${f##*/}"
+  cp "$f" "$nf" ;
+
+  printf "creating SVG-font: %s\n" "$nf"
+  inkscape -f "$nf" \
+    --select=canvas --select=hanzi \
+      --verb=AlignHorizontalLeft \
+      --verb=EditDeselect --verb=FileSave \
+    --select=pinyin \
+      --verb=AlignHorizontalRight \
+      --verb=EditDeselect --verb=FileSave \
+    --select=canvas --verb=EditDelete \
+    --select=hanzi --select=pinyin \
+      --verb=AlignVerticalCenter \
+      --verb=SelectionUnion \
+      --verb=FileSave --verb=FileQuit
+done
 
 kill $XVFB_PID
