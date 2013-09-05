@@ -12,6 +12,9 @@ scriptDir="$(dirname "$0")" # emplacement du script
 
 inputFile="${2:-"$HPF_UNIHAN_READING_SHORT"}"
 
+# Empty directory svg-text/
+rm "$HPF_SVGTEXT_DIR"/*
+
 while IFS=';' read -r unicode hanzi pinyin;
 do
   outputFile="$HPF_SVGTEXT_DIR/$hanzi-x${unicode#U+*}.svg"
