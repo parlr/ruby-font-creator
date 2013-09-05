@@ -13,9 +13,9 @@ scriptDir="$(dirname "$0")" # emplacement du script
 inputFile="${2:-"$HPF_UNIHAN_READING_SHORT"}"
 
 
-# Fake a X server
-Xvfb :1 -screen 0 1024x768x8 &
-export DISPLAY=":1
+Fake a X server
+Xvfb :8 -screen 0 1024x768x8 -extension RANDR &> /dev/null &
+export DISPLAY=":8"
 
 
 # cp 㐀-x3400.svg test-union-cli.svg; inkscape -z -f test-union-cli.svg --select=hanzi --select=pinyin --verb=SelectionUnion --verb=FileSave --verb=FileClose
