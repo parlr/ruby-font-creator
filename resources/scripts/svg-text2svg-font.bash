@@ -15,7 +15,11 @@ inputFile="${2:-"$HPF_UNIHAN_READING_SHORT"}"
 
 Fake a X server
 Xvfb :8 -screen 0 1024x768x8 -extension RANDR &> /dev/null &
+XVFB_PID=$!
+echo $XVFB_PID > ./xvfb.pid
 export DISPLAY=":8"
 
 
 # cp 㐀-x3400.svg test-union-cli.svg; inkscape -z -f test-union-cli.svg --select=hanzi --select=pinyin --verb=SelectionUnion --verb=FileSave --verb=FileClose
+
+kill $XVFB_PID
