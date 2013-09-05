@@ -9,3 +9,4 @@ resources/svg-text/*.svg
 resources/saxon/*
 resources/tmp/*
 logs/*
+xvfb.pid
