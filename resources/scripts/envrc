@@ -12,12 +12,17 @@ scriptDir="$(dirname "$0")" # emplacement du script
 resourcesDir="${scriptDir%/*}"
 
 # Saxon
-HPF_SAXON_DIR=="$resourcesDir/saxon"
-HPF_SAXON_JAR=="$HPF_SAXON_DIR/saxon9he.jar"
+HPF_SAXON_DIR="$resourcesDir/saxon"
+HPF_SAXON_JAR="$HPF_SAXON_DIR/saxon9he.jar"
+
+# XSLT
+HPF_XSLT_DIR="$resourcesDir/xslt"
+HPF_XSLT_CSV2SVG="$HPF_XSLT_DIR/csv2svg.xsl"
+
 
 # Unihan Resources
 HPF_UNIHAN_DIR="$resourcesDir/unihan"
-HPF_UNIHAN_READING="$HPF_UNIHAN_DIR/unihan/Unihan_Readings.txt"
+HPF_UNIHAN_READING="$HPF_UNIHAN_DIR/Unihan_Readings.txt"
 
 # Templates
 HPF_TPL_DIR="$resourcesDir/tpl"
@@ -31,4 +36,4 @@ HPF_SVGFONT_DIR="${HPF_SVG_DIR}-font"
 
 # TMP
 HPF_TMP_DIR="$resourcesDir/tmp"
-HPF_UNIHAN_READING_SHORT="$HPF_TMP_DIR/unihan/unicode-pinyin.csv"
+HPF_UNIHAN_READING_SHORT="$HPF_TMP_DIR/unicode-pinyin.csv"
