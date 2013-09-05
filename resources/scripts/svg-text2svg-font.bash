@@ -31,10 +31,10 @@ do
   inkscape -f "$nf" \
     --select=canvas --select=hanzi \
       --verb=AlignHorizontalLeft \
-      --verb=EditDeselect --verb=FileSave \
+      --verb=EditDeselect \
     --select=pinyin \
       --verb=AlignHorizontalRight \
-      --verb=EditDeselect --verb=FileSave \
+      --verb=EditDeselect \
     --select=canvas --verb=EditDelete \
     --select=hanzi --select=pinyin \
       --verb=AlignVerticalCenter \
