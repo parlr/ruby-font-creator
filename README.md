@@ -15,6 +15,8 @@ Font builder to help students of Chinese learn to read faster. In order to do so
     git clone git@github.com:edouard-lopez/Hanzi-Pinyin-Font.git
     bash ./resources/scripts/install.bash
 
-# Run
+## Build font
 
-    bash ./resources/scripts/extract-unicode-pinyin.bash
+    command time -a -o logs/extract-unicode-pinyin.log bash ./resources/scripts/extract-unicode-pinyin.bash
+    command time -a -o logs/csv2svg-text.log bash ./resources/scripts/csv2svg-text.bash
+    command time -a -o logs/svg-text2svg-font.log bash ./resources/scripts/svg-text2svg-font.bash
