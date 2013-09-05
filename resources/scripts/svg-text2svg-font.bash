@@ -32,7 +32,7 @@ do
     --select=canvas --select=hanzi \
       --verb=AlignHorizontalLeft \
       --verb=EditDeselect \
-    --select=pinyin \
+    --select=canvas --select=pinyin \
       --verb=AlignHorizontalRight \
       --verb=EditDeselect \
     --select=canvas --verb=EditDelete \
