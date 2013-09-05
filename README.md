@@ -12,7 +12,7 @@ Font builder to help students of Chinese learn to read faster. In order to do so
 
 ## Install
 
-    git clone <project_URL>
+    git clone git@github.com:edouard-lopez/Hanzi-Pinyin-Font.git
     bash ./resources/scripts/install.bash
 
 # Run
