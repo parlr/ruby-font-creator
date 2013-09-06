@@ -9,7 +9,9 @@
 # @author: Édouard Lopez <dev+project@edouard-lopez.com>
 
 scriptDir="$(dirname "$0")" # emplacement du script
-resourcesDir="${scriptDir%/*}"
+appDir=$(cd "${scriptDir%/*}" && cd .. && pwd )
+resourcesDir="$appDir/resources"
+
 # Fake a X server, to contains Inkscape
 Xvfb :8 -screen 0 1024x768x8 &> /dev/null &
 XVFB_PID=$!
