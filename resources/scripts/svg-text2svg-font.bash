@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # DESCRIPTION
-#   Select all text node and create a union of them
+#   Select all text nodes and create a union of them
 #
 # USAGE
 #   bash ./resources/scripts/svg-text2svg-font.bash
