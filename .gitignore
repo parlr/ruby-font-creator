@@ -11,3 +11,4 @@ resources/saxon/*
 logs/*
 xvfb.pid
 resources/fonts/*.ttf
+*.tar.gz
