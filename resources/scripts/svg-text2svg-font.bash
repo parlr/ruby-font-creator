@@ -22,24 +22,20 @@ export DISPLAY=":8"
 printf "Removing existing SVG-font files…\n"
 rm "$HPF_SVGFONT_DIR"/*.svg
 
+inkscapeOptions=(
+  --select=canvas --select=hanzi --verb=AlignHorizontalLeft --verb=EditDeselect
+  --select=canvas --select=pinyin --verb=AlignHorizontalRight --verb=EditDeselect
+  --select=canvas --verb=EditDelete --select=hanzi --select=pinyin
+  --verb=AlignVerticalCenter --verb=SelectionUnion --verb=FileSave --verb=FileQuit
+)
+
 for f in "$HPF_SVGTEXT_DIR"/*.svg;
 do
   nf="$HPF_SVGFONT_DIR/${f##*/}"
   cp "$f" "$nf" ;
 
   printf "creating SVG-font: %s\n" "$nf"
-  inkscape -f "$nf" \
-    --select=canvas --select=hanzi \
-      --verb=AlignHorizontalLeft \
-      --verb=EditDeselect \
-    --select=canvas --select=pinyin \
-      --verb=AlignHorizontalRight \
-      --verb=EditDeselect \
-    --select=canvas --verb=EditDelete \
-    --select=hanzi --select=pinyin \
-      --verb=AlignVerticalCenter \
-      --verb=SelectionUnion \
-      --verb=FileSave --verb=FileQuit
+  inkscape -f "$nf" "${inkscapeOptions[@]}"
 done
 
 kill $XVFB_PID
