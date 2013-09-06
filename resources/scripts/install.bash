@@ -24,9 +24,9 @@
     rm "$f"
   done
 
-  cd ../saxon
-  wget http://sourceforge.net/projects/saxon/files/latest/download?source=files -O saxon-HE.zip
-  unzip -o saxon-HE.zip
+  # cd ../saxon
+  # wget http://sourceforge.net/projects/saxon/files/latest/download?source=files -O saxon-HE.zip
+  # unzip -o saxon-HE.zip
 
   cd ../fonts
   wget https://raw.github.com/android/platform_frameworks_base/master/data/fonts/DroidSansFallbackFull.ttf
