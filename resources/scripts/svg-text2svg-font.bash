@@ -12,13 +12,6 @@ scriptDir="$(dirname "$0")" # emplacement du script
 
 inputFile="${2:-"$HPF_UNIHAN_READING_SHORT"}"
 
-
-# Fake a X server
-Xvfb :8 -screen 0 1024x768x8 &> /dev/null &
-XVFB_PID=$!
-echo $XVFB_PID > ./xvfb.pid
-export DISPLAY=":8"
-
 printf "Removing existing SVG-font files…\n"
 rm "$HPF_SVGFONT_DIR"/*.svg
 

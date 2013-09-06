@@ -10,6 +10,12 @@
 
 scriptDir="$(dirname "$0")" # emplacement du script
 resourcesDir="${scriptDir%/*}"
+# Fake a X server, to contains Inkscape
+Xvfb :8 -screen 0 1024x768x8 &> /dev/null &
+XVFB_PID=$!
+echo $XVFB_PID > ./xvfb.pid
+export DISPLAY=":8"
+
 
 # Saxon
 HPF_SAXON_DIR="$resourcesDir/saxon"
