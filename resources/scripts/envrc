@@ -26,8 +26,8 @@ HPF_UNIHAN_READING="$HPF_UNIHAN_DIR/Unihan_Readings.txt"
 
 # Templates
 HPF_TPL_DIR="$resourcesDir/tpl"
-HPF_TPL_SVGTEXT="$resourcesDir/tpl/svg.text-x###.svg.tpl"
-HPF_TPL_SVGPATH="$resourcesDir/tpl/svg.path-x###.svg.tpl"
+HPF_TPL_SVGTEXT="$resourcesDir/tpl/svg.text-x###.tpl.svg"
+HPF_TPL_SVGPATH="$resourcesDir/tpl/svg.path-x###.tpl.svg"
 
 # SVG
 HPF_SVG_DIR="$resourcesDir/svg"
