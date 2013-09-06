@@ -4,7 +4,6 @@ Font builder to help students of Chinese learn to read faster. In order to do so
 
 ## Requirements
 
-* `Droid Sans Fallback Full` font, that will be downloaded from [Android repository](https://github.com/android/platform_frameworks_base/tree/master/data/fonts) into `resources/fonts/` directory by the install script ;
 * `xsltproc` to create SVG text files ;
 * `Inkscape` (`≥v0.49`) to create union of text element ;
 * `Xvfb` due to [weak CLI support in `inkscape`](http://stackoverflow.com/questions/18630229/how-to-save-svg-file-with-inkscape-cli) ;
