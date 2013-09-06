@@ -53,9 +53,10 @@ function printValidChars() {
     # skip invalid chars, don't need '$' in arithmetic context
     (( isValid[uni] )) || continue
 
+    hex="$(printf "%X" $uni)"
     # $uni need to be converted from hex→decimal (%04X) and octal (%b)
     printf 'U+%04X;%b;%s\n' \
-      "$uni" "\\u$uni" "${char[uni]}" \
+      "$uni" "\\u$hex" "${char[uni]}" \
     >> "$outputFile"
   done
 }
