@@ -19,6 +19,8 @@ HPF_SAXON_JAR="$HPF_SAXON_DIR/saxon9he.jar"
 HPF_XSLT_DIR="$resourcesDir/xslt"
 HPF_XSLT_CSV2SVG="$HPF_XSLT_DIR/csv2svg.xsl"
 
+# FONTS
+HPF_FONT_DIR="$resourcesDir/fonts"
 
 # Unihan Resources
 HPF_UNIHAN_DIR="$resourcesDir/unihan"
