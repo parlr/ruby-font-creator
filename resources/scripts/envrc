@@ -2,6 +2,9 @@
 # DESCRIPTION
 #   Declare project variable to be used by other scripts
 #
+#   Launch Inkscape with minimal fonts to speed up batch processing. For that,
+#   we use special $XDG_*_HOME setup and fontconfig $PATH
+#
 # USAGE
 #   Other script need to include this file:
 #     . envrc
@@ -47,3 +50,14 @@ HPF_SVGFONT_DIR="${HPF_SVG_DIR}-font"
 # TMP
 HPF_TMP_DIR="$resourcesDir/tmp"
 HPF_UNIHAN_READING_SHORT="$HPF_TMP_DIR/unicode-pinyin.csv"
+
+# INKSCAPE OPTIMIZATION
+HPF_MINIMAL_XDG="${$appDir}/local"
+# env
+export XDG_CONFIG_HOME="${HPF_MINIMAL_XDG}/config"
+export XDG_CACHE_HOME="${HPF_MINIMAL_XDG}/cache"
+export XDG_DATA_HOME="${HPF_MINIMAL_XDG}/share"
+# export GTK2_RC_FILES="${HPF_MINIMAL_XDG}/config/gtk-2.0/gtkrc"
+# fonts
+export FONTCONFIG_PATH="${HPF_MINIMAL_XDG}/config/fontconfig"
+export FONTCONFIG_FILE="${HPF_MINIMAL_XDG}/config/fontconfig/fonts.conf"
