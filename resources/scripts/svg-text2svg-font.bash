@@ -13,8 +13,8 @@ scriptDir="$(dirname "$0")" # emplacement du script
 inputFile="${2:-"$HPF_UNIHAN_READING_SHORT"}"
 
 
-Fake a X server
 Xvfb :8 -screen 0 1024x768x8 -extension RANDR &> /dev/null &
+# Fake a X server
 XVFB_PID=$!
 echo $XVFB_PID > ./xvfb.pid
 export DISPLAY=":8"
