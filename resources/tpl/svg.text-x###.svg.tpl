@@ -65,7 +65,7 @@
    ry="0" />
   <text
      xml:space="preserve"
-     style="font-size:800px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+     style="font-size:800px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans Fallback;-inkscape-font-specification:Droid Sans Fallback"
      x="-40.625"
      y="789.0625"
      id="hanzi"
@@ -75,7 +75,7 @@
        y="789.0625">爱</tspan></text>
   <text
      xml:space="preserve"
-     style="font-size:200px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+     style="font-size:200px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans Fallback;-inkscape-font-specification:Droid Sans Fallback"
      id="pinyin"
      y="-760.05859"
      x="414.25781"

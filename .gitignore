@@ -10,3 +10,4 @@ resources/saxon/*
 resources/tmp/*
 logs/*
 xvfb.pid
+resources/fonts/*.ttf
