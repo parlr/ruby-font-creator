@@ -12,7 +12,7 @@
 # @author: Édouard Lopez <dev+project@edouard-lopez.com>
 
 scriptDir="$(dirname "$0")" # emplacement du script
-appDir=$(cd "${scriptDir%/*}" && cd .. && pwd )
+appDir="$(cd "${scriptDir%/*}" && cd .. && pwd )"
 resourcesDir="$appDir/resources"
 
 # Fake a X server, to contains Inkscape
@@ -52,7 +52,7 @@ HPF_TMP_DIR="$resourcesDir/tmp"
 HPF_UNIHAN_READING_SHORT="$HPF_TMP_DIR/unicode-pinyin.csv"
 
 # INKSCAPE OPTIMIZATION
-HPF_MINIMAL_XDG="${$appDir}/local"
+HPF_MINIMAL_XDG="${appDir}/local"
 # env
 export XDG_CONFIG_HOME="${HPF_MINIMAL_XDG}/config"
 export XDG_CACHE_HOME="${HPF_MINIMAL_XDG}/cache"
