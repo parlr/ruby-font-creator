@@ -19,6 +19,7 @@ while IFS=';' read -r unicode hanzi pinyin;
 do
   outputFile="$HPF_SVGTEXT_DIR/$hanzi-x${unicode#U+*}.svg"
 
+  printf "creating SVG-text: %s /%s/\n" "$hanzi" "$pinyin"
   xsltproc -o "$outputFile" \
     --stringparam unicode "$unicode" \
     --stringparam hanzi "$hanzi" \

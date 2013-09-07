@@ -34,7 +34,7 @@
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 <xsl:template match="/">
-<xsl:message>WIP: <xsl:value-of select="$hanzi" />/<xsl:value-of select="$pinyin" />/</xsl:message>
+<!-- <xsl:message>WIP: <xsl:value-of select="$hanzi" />/<xsl:value-of select="$pinyin" />/</xsl:message> -->
   <xsl:apply-templates />
 </xsl:template>
 
