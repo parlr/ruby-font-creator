@@ -12,3 +12,6 @@ logs/*
 xvfb.pid
 resources/fonts/*.ttf
 *.tar.gz
+local/cache/*/*
+*.xbel
+*.log
