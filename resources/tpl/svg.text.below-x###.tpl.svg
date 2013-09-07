@@ -75,15 +75,6 @@
          d="" />
     </font>
   </defs>
-  <rect
-     style="fill:#ffd5d5;fill-opacity:1;stroke:none"
-     id="canvas"
-     width="1000"
-     height="1000"
-     x="0"
-     y="-1.1368684e-13"
-     rx="0"
-     ry="0" />
   <text
      sodipodi:linespacing="125%"
      xml:space="preserve"

@@ -418,9 +418,9 @@
        offset="0"
        offsetunits="cm" />
     <group
-       unit="px"
+       id="measure"
        fontsize="10"
-       id="measure" />
+       unit="px" />
   </group>
   <group
      id="palette">
