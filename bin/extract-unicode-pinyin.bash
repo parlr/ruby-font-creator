@@ -3,13 +3,9 @@
 #   Extract unicode and pinyin prononciation and generate the character
 #
 # USAGE
-#   bash ./scripts/extract-unicode-pinyin.bash
+#   bash ./bin/extract-unicode-pinyin.bash
 #
 # @author: Édouard Lopez <dev+hpf@edouard-lopez.com>
-
-scriptDir="$(dirname "$0")" # emplacement du script
-. "$scriptDir"/envrc # project variables
-
 
 inputFile="${1:-"$HPF_UNIHAN_READING"}"
 outputFile="${2:-"$HPF_UNIHAN_READING_SHORT"}"
