@@ -15,6 +15,7 @@ resources/fonts/*.ttf
 local/cache/*/*
 *.xbel
 *.log
+*.zip
 
 ###Node###
 
