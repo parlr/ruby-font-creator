@@ -70,6 +70,7 @@ ${HPF_SVGTEXT_DIR}/%.svg:
 	${APP_DIR}/csv2svg-text.bash "${HPF_UNIHAN_READING_SHORT}"
 
 
+
 extract-unicode-pinyin: extract-data ${HPF_UNIHAN_READING_SHORT}
 ${HPF_UNIHAN_READING_SHORT}:
 	${APP_DIR}/extract-unicode-pinyin.bash "${HPF_UNIHAN_READING}" "${HPF_UNIHAN_READING_SHORT}"
@@ -122,6 +123,7 @@ create-require-dirs:
 
 install-requirements:
 	sudo apt-get install xsltproc xvfb inkscape php5 bash gawk
+	npm install
 
 clean-svg:
 	rm -rf "${HPF_SVG_DIR}"
