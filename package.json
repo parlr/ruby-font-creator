@@ -4,6 +4,7 @@
   "description": "Project to create a Chinese font displaying Hanzi (汉字) characters followed by transliteration/pronunciation (Pīnyīn)",
   "main": "index.js",
   "dependencies": {
+    "gulp": "^3.8.9",
     "gulp-iconfont": "^0.2.1"
   },
   "devDependencies": {},
