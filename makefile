@@ -118,6 +118,9 @@ create-require-dirs:
 	); \
 	for dir in "$${required[@]}"; do [[ ! -d "$$dir" ]] && mkdir -p "$$dir" || true; done
 
+install:
+	sudo apt-get install xsltproc xvfb inkscape php5 bash gawk
+
 clean-svg:
 	rm -rf "${HPF_SVG_DIR}"
 clean-svg-text:
