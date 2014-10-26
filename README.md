@@ -7,7 +7,7 @@ Font builder to help students of Chinese learn to read faster. In order to do so
 * `xsltproc` to create SVG text files ;
 * `Inkscape` (`≥v0.49`) to create union of text element ;
 * `Xvfb` due to [weak CLI support in `inkscape`](http://stackoverflow.com/questions/18630229/how-to-save-svg-file-with-inkscape-cli) ;
-* `PHP`, [SVG-Icon-Font-Generator](https://github.com/madeyourday/SVG-Icon-Font-Generator) ;
+* `nodejs`, [`NPM`](http://npmjs.org/)  and [`gulp-iconfont`](https://www.npmjs.org/package/gulp-iconfont);
 * Also `bash` and `awk`
 
 ## Install
