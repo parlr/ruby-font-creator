@@ -74,6 +74,8 @@ extract-unicode-pinyin: extract-data ${HPF_UNIHAN_READING_SHORT}
 ${HPF_UNIHAN_READING_SHORT}:
 	${APP_DIR}/extract-unicode-pinyin.bash "${HPF_UNIHAN_READING}" "${HPF_UNIHAN_READING_SHORT}"
 
+install: install-requirements get-data
+
 get-data: download-fonts download-data extract-data
 
 extract-data: download-data ${HPF_UNIHAN_DIR}/*.zip
