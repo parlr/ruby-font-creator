@@ -118,7 +118,7 @@ create-require-dirs:
 	); \
 	for dir in "$${required[@]}"; do [[ ! -d "$$dir" ]] && mkdir -p "$$dir" || true; done
 
-install:
+install-requirements:
 	sudo apt-get install xsltproc xvfb inkscape php5 bash gawk
 
 clean-svg:
