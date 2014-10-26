@@ -25,7 +25,9 @@ make install-requirements
 
 ## Build font
 
-    command time -a -o logs/extract-unicode-pinyin.log bash bin/extract-unicode-pinyin.bash
-    command time -a -o logs/csv2svg-text.log bash bin/csv2svg-text.bash
-    command time -a -o logs/svg-text2svg-font.log bash bin/svg-text2svg-font.bash
+The process is extremely slow and **take ~20 hours** due to lack of real CLI support in [`Inkscape`](http://stackoverflow.com/questions/18630229/how-to-save-svg-file-with-inkscape-cli).
+
+```bash
+make build-font
+```
 
