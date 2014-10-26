@@ -31,3 +31,7 @@ The process is extremely slow and **take ~20 hours** due to lack of real CLI sup
 make build-font
 ```
 
+### Benchmark
+```bash
+command time -a -o make build-font
+```
