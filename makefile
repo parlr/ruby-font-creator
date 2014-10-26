@@ -19,6 +19,9 @@ scriptDir:="." # emplacement du script
 APP_DIR:=bin
 RESOURCES_DIR:=./resources
 
+# Verbosity flag (boolean)
+HPF_VERBOSE:=true
+
 # XSLT
 HPF_XSLT_DIR:=${RESOURCES_DIR}/xslt
 HPF_XSLT_CSV2SVG:=${HPF_XSLT_DIR}/csv2svg.xsl
