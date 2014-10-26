@@ -124,7 +124,8 @@ create-require-dirs:
 	for dir in "$${required[@]}"; do [[ ! -d "$$dir" ]] && mkdir -p "$$dir" || true; done
 
 install-requirements:
-	sudo apt-get install xsltproc xvfb inkscape php5 bash gawk
+	sudo add-apt-repository ppa:inkscape.dev/trunk && sudo apt-get update
+	sudo apt-get install xsltproc xvfb inkscape-trunk php5 bash gawk
 	npm install
 
 clean-svg:
