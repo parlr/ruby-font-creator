@@ -55,6 +55,8 @@ XDG_DATA_HOME:=${HPF_MINIMAL_XDG}/share
 FONTCONFIG_PATH:=${HPF_MINIMAL_XDG}/config/fontconfig
 FONTCONFIG_FILE:=${HPF_MINIMAL_XDG}/config/fontconfig/fonts.conf
 
+build-font: svg-text2svg-font
+	gulp build-font
 
 svg-text2svg-font: csv2svg-text ${HPF_SVGFONT_DIR}/*.svg
 ${HPF_SVGFONT_DIR}/%.svg:
