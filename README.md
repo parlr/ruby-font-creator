@@ -13,13 +13,14 @@ Font builder to help students of Chinese learn to read faster. In order to do so
 ## Install
 
 ```bash
-# requirements
-apt-get install xsltproc xvfb inkscape php5 bash gawk
+# install tooling
+sudo apt-get install make git
 ```
 
 ```bash
 git clone git@github.com:edouard-lopez/Hanzi-Pinyin-Font.git
-bash bin/install.bash
+# install: xsltproc xvfb inkscape php5 bash gawk
+make install-requirements
 ```
 
 ## Build font
