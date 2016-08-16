@@ -1,27 +1,31 @@
 {
-  "name": "Hanzi-Pinyin-Font",
+  "name": "hanzi-pinyin-font",
   "version": "0.0.1",
   "description": "Project to create a Chinese font displaying Hanzi (汉字) characters followed by transliteration/pronunciation (Pīnyīn)",
   "main": "index.js",
   "dependencies": {
-    "gulp": "^3.8.9",
-    "gulp-iconfont": "^0.2.1"
+    "text-to-svg": "^3.0.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "test"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@git.edouard-lopez.com:822/root/hanzi-pinyin-font.git"
+    "url": "git+https://github.com/edouard-lopez/Hanzi-Pinyin-Font.git"
   },
   "keywords": [
     "chinese",
     "font",
-    "icons",
-    "SVG",
-    "learn"
+    "hanzi",
+    "汉字",
+    "pinyin",
+    "learning"
   ],
   "author": "Édouard Lopez",
-  "license": "AGPLv3"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edouard-lopez/Hanzi-Pinyin-Font/issues"
+  },
+  "homepage": "https://github.com/edouard-lopez/Hanzi-Pinyin-Font#readme"
 }
