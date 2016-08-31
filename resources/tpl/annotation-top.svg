@@ -13,9 +13,9 @@
    width="1000"
    height="1000"
    id="gid"
-   inkscape:version="0.48+devel r"
+   inkscape:version="0.91 r13725"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   sodipodi:docname="svg.text.below-x###.svg.tpl.svg">
+   sodipodi:docname="annotation-top.svg">
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -25,12 +25,12 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1366"
-     inkscape:window-height="743"
-     id="namedview15"
+     inkscape:window-width="1920"
+     inkscape:window-height="1051"
+     id="namedview14"
      showgrid="false"
      inkscape:zoom="0.236"
-     inkscape:cx="-103.81356"
+     inkscape:cx="-239.40678"
      inkscape:cy="500"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -70,31 +70,31 @@
          id="missing-glyph3937" />
       <glyph
          id="font-glyph"
-         glyph-name="U+4E5C: 乜/miē/"
-         unicode="乜"
+         glyph-name="NAME"
+         unicode="UNICODE_GLYPH"
          d="" />
     </font>
   </defs>
   <text
-     sodipodi:linespacing="125%"
      xml:space="preserve"
-     style="font-size:937.5px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans Fallback;-inkscape-font-specification:Droid Sans Fallback"
-     x="31.25"
-     y="762.29395"
-     id="hanzi"><tspan
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:800px;line-height:125%;font-family:'Droid Sans Fallback';-inkscape-font-specification:'Droid Sans Fallback';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+     x="74.75"
+     y="941.375"
+     id="hanzi"
+     sodipodi:linespacing="125%"><tspan
        id="hanzi-glyph"
-       x="31.25"
-       y="762.29395"
-       style="font-size:937.5px">乜</tspan></text>
+       x="74.75"
+       y="941.375"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:875px;font-family:'Noto Sans CJK TC';-inkscape-font-specification:'Noto Sans CJK TC'">爱</tspan></text>
   <text
-     sodipodi:linespacing="125%"
      xml:space="preserve"
-     style="font-size:200px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans Fallback;-inkscape-font-specification:Droid Sans Fallback"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:200px;line-height:125%;font-family:'Droid Sans Fallback';-inkscape-font-specification:'Droid Sans Fallback';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
      id="pinyin"
-     y="1002.2842"
-     x="284.66797"><tspan
+     y="231"
+     x="389.65039"
+     sodipodi:linespacing="125%"><tspan
        id="pinyin-text"
-       x="284.66797"
-       y="1002.2842"
-       style="font-size:250px">miē</tspan></text>
+       x="389.65039"
+       y="231"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:250px;font-family:'Noto Sans CJK TC';-inkscape-font-specification:'Noto Sans CJK TC'">ài</tspan></text>
 </svg>
