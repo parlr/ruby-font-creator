@@ -1,5 +1,7 @@
 # Hanzi-pinyin-font
 
+> I'm **restarting the project**, informations below might not accurate while this message is present. 
+
 Font builder to help students of Chinese learn to read faster. In order to do so we created a font that append both the Character (漢字) and the pronociation (pīnyīn).
 
 ## Requirements
