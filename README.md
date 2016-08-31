@@ -35,3 +35,7 @@ make build-font
 ```bash
 command time -a -o make build-font
 ```
+
+## Font
+
+This project use [Noto Sans CJK](https://github.com/googlei18n/noto-cjk) as it [support Chinese and is under open licence](https://www.wikiwand.com/en/Noto_fonts).

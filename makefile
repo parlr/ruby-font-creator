@@ -63,6 +63,7 @@ build-font: svg-text2svg-font
 
 svg-text2svg-font: csv2svg-text ${HPF_SVGFONT_DIR}/*.svg
 ${HPF_SVGFONT_DIR}/%.svg:
+	export HPF_VERBOSE="${HPF_VERBOSE}"; \
 	export HPF_SVGTEXT_DIR="${HPF_SVGTEXT_DIR}"; \
 	export HPF_SVGFONT_DIR="${HPF_SVGFONT_DIR}"; \
 	${APP_DIR}/svg-text2svg-font.bash "${HPF_UNIHAN_READING_SHORT}"
@@ -102,12 +103,11 @@ ${HPF_UNIHAN_DIR}/%.zip:
 		&& wget http://www.unicode.org/Public/UCD/latest/ucdxml/ucd.all.grouped.zip \
 		|| true;
 
-download-fonts: create-require-dirs ${HPF_FONT_DIR}/*.ttf
-${HPF_FONT_DIR}/%.ttf:
+download-fonts: create-require-dirs ${HPF_FONT_DIR}/*.otf
+${HPF_FONT_DIR}/%.otf:
 	cd ${HPF_FONT_DIR}; \
-	[[ ! -f "DroidSansFallbackFull.ttf" ]] \
-	&& wget https://raw.github.com/android/platform_frameworks_base/master/data/fonts/DroidSansFallbackFull.ttf \
-		|| true; \
+	wget https://github.com/googlei18n/noto-cjk/raw/master/NotoSansTC-Regular.otf; \
+	wget https://github.com/googlei18n/noto-cjk/blob/master/LICENSE
 
 create-require-dirs:
 	required=( \
