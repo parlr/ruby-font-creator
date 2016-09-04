@@ -4,6 +4,7 @@
   "description": "Project to create a Chinese font displaying Hanzi (汉字) characters followed by transliteration/pronunciation (Pīnyīn)",
   "main": "index.js",
   "scripts": {
+    "start": "node --require babel-core/register ./index.js",
     "test": "xo && ava test --require babel-core/register"
   },
   "dependencies": {

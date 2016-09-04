@@ -1,4 +1,6 @@
 import ruby from './src/ruby';
 
-ruby.text('北京');
-ruby.annotation('běijīng');
+const text = ruby.text('北京');
+const annotation = ruby.annotation('běijīng');
+
+console.log(text, annotation);
