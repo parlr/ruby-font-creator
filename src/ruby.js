@@ -29,5 +29,12 @@ export default {
 			attributes: attrs};
 
 		return textToSVG.getSVG(pinyin, options);
+	},
+	getData(doc) {
+		const parser = new DOMParser();
+		const svg = parser.parseFromString(doc, 'image/svg+xml');
+		const path = svg.querySelector('path');
+
+		return path.attributes.getNamedItem('d').value;
 	}
 };
