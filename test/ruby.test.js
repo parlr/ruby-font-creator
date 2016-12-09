@@ -14,7 +14,7 @@ test('should create svg path with text', t => {
 	const chinese = '北京';
 
 	const doc = ruby.text(chinese);
-	const data = ruby.getData(doc)
+	const data = ruby.getData(doc);
 
 	t.is(data.length > 0, true);
 });
@@ -23,7 +23,7 @@ test('should create svg path with annotation', t => {
 	const annotation = 'běijīng';
 
 	const doc = ruby.annotation(annotation);
-	const data = ruby.getData(doc)
+	const data = ruby.getData(doc);
 
 	t.is(data.length > 0, true);
 });
