@@ -3,9 +3,15 @@
   "version": "0.0.1",
   "description": "Project to create a Chinese font displaying Hanzi (汉字) characters followed by transliteration/pronunciation (Pīnyīn)",
   "main": "index.js",
+  "author": "Édouard Lopez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edouard-lopez/Hanzi-Pinyin-Font/issues"
+  },
+  "homepage": "https://github.com/edouard-lopez/Hanzi-Pinyin-Font#readme",
   "scripts": {
     "start": "node --require babel-core/register ./index.js",
-    "test": "xo && ava test --require babel-core/register"
+    "test": "xo && ava test"
   },
   "dependencies": {
     "text-to-svg": "^3.0.1"
@@ -22,11 +28,11 @@
     "webpack": "^1.13.2",
     "xo": "^0.17.1"
   },
-  "xo": {
-    "esnext": true,
-    "envs": [
-      "browser"
-    ]
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
   },
   "babel": {
     "presets": [
@@ -50,10 +56,13 @@
     "pinyin",
     "learning"
   ],
-  "author": "Édouard Lopez",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/edouard-lopez/Hanzi-Pinyin-Font/issues"
-  },
-  "homepage": "https://github.com/edouard-lopez/Hanzi-Pinyin-Font#readme"
+  "xo": {
+    "esnext": true,
+    "envs": [
+      "browser"
+    ],
+    "ignores": [
+      "svg-font-create/*"
+    ]
+  }
 }
