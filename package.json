@@ -11,7 +11,7 @@
   "homepage": "https://github.com/edouard-lopez/Hanzi-Pinyin-Font#readme",
   "scripts": {
     "start": "node --require babel-core/register ./index.js",
-    "test": "xo && ava test"
+    "test": "ava test ; xo"
   },
   "dependencies": {
     "text-to-svg": "^3.0.1"
@@ -62,7 +62,8 @@
       "browser"
     ],
     "ignores": [
-      "svg-font-create/*"
+      "svg-font-create/*",
+      "resources/*"
     ]
   }
 }
