@@ -1,6 +1,7 @@
 # Hanzi-pinyin-font
 
-> I'm **restarting the project**, informations below might not accurate while this message is present. 
+> 2016/12/15: I'm **revamping the project**, informations below might not accurate while this message is present. 
+----
 
 Font builder to help students of Chinese learn to read faster. In order to do so we created a font that append both the Character (漢字) and the pronociation (pīnyīn).
 
@@ -12,17 +13,15 @@ Font builder to help students of Chinese learn to read faster. In order to do so
 * `nodejs`, [`NPM`](http://npmjs.org/)  and [`gulp-iconfont`](https://www.npmjs.org/package/gulp-iconfont);
 * Also `bash` and `awk`
 
+<!-- sudo apt-get install make git                                     # install tooling -->
+
+
 ## Install
 
 ```bash
-# install tooling
-sudo apt-get install make git
-```
-
-```bash
-git clone git@github.com:edouard-lopez/Hanzi-Pinyin-Font.git
-# install: xsltproc xvfb inkscape php5 bash gawk
-make install-requirements
+git clone git@github.com:edouard-lopez/Hanzi-Pinyin-Font.git      # get repository
+cd ./Hanzi-Pinyin-Font
+npm install                                                       # install dependencies
 ```
 
 ## Build font
