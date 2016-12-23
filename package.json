@@ -14,7 +14,8 @@
     "test": "ava test ; xo"
   },
   "dependencies": {
-    "text-to-svg": "^3.0.1"
+    "text-to-svg": "^3.0.1",
+    "webfont": "^7.0.0"
   },
   "devDependencies": {
     "ava": "^0.17.0",
