@@ -1,42 +1,37 @@
 # Hanzi-pinyin-font
 
-> 2016/12/15: I'm **revamping the project**, informations below might not accurate while this message is present. 
-----
+> I'm **restarting the project**, informations below might not accurate while this message is present. 
 
 Font builder to help students of Chinese learn to read faster. In order to do so we created a font that append both the Character (漢字) and the pronociation (pīnyīn).
 
 ## Requirements
 
-* `xsltproc` to create SVG text files ;
-* `Inkscape` (**`≥v0.49`**) to create union of text element ;
-* `Xvfb` due to [weak CLI support in `inkscape`](http://stackoverflow.com/questions/18630229/how-to-save-svg-file-with-inkscape-cli) ;
-* `nodejs`, [`NPM`](http://npmjs.org/)  and [`gulp-iconfont`](https://www.npmjs.org/package/gulp-iconfont);
-* Also `bash` and `awk`
-
-<!-- sudo apt-get install make git                                     # install tooling -->
-
+* `nodejs`, [`NPM`](http://npmjs.org/) ;
 
 ## Install
 
-```bash
-git clone git@github.com:edouard-lopez/Hanzi-Pinyin-Font.git      # get repository
-cd ./Hanzi-Pinyin-Font
-npm install                                                       # install dependencies
-```
+	npm install 
 
-## Build font
+## Usage
 
-The process is extremely slow and **take ~20 hours** due to lack of real CLI support in [`Inkscape`](http://stackoverflow.com/questions/18630229/how-to-save-svg-file-with-inkscape-cli).
-
-```bash
-make build-font
-```
-
-### Benchmark
-```bash
-command time -a -o make build-font
-```
-
+	npm start
+	
 ## Font
 
 This project use [Noto Sans CJK](https://github.com/googlei18n/noto-cjk) as it [support Chinese and is under open licence](https://www.wikiwand.com/en/Noto_fonts).
+
+## License 
+
+> Copyright (C) 2013 Hanzi Pinyin Font Project
+> 
+> Licensed under the Apache License, Version 2.0 (the "License");
+> you may not use this file except in compliance with the License.
+> You may obtain a copy of the License at
+> 
+>      http://www.apache.org/licenses/LICENSE-2.0
+> 
+> Unless required by applicable law or agreed to in writing, software
+> distributed under the License is distributed on an "AS IS" BASIS,
+> WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+> See the License for the specific language governing permissions and
+> limitations under the License.

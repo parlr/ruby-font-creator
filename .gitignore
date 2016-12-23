@@ -12,6 +12,8 @@ resources/fonts/*
 *.xbel
 *.log
 *.zip
+build/
+test/*.svg
 
 ###Node###
 logs
