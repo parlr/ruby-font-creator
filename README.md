@@ -4,6 +4,26 @@
 
 Font builder to help students of Chinese learn to read faster. In order to do so we created a font that append both the Character (漢字) and the pronociation (pīnyīn).
 
+## Input/Output
+**Input:** a free license unicode font, a json pairing CJK unicode characters and phonetic value (one single value).
+
+**Output (Our objective):** [serie of svg files with the glyph and the pinying], `{yourFont}-{yourPhonetic}-{position}-{direction}.svg`, and ttf version.
+
+<p align="center">
+  <img width="100px" src="https://github.com/edouard-lopez/Hanzi-Pinyin-Font/blob/master//resources/tpl/annotation-top.png?raw=true" alt="Schematic image"/>
+  <img width="100px" src="https://github.com/edouard-lopez/Hanzi-Pinyin-Font/blob/master//resources/tpl/annotation-bottom.png?raw=true" alt="Schematic image"/>
+  </p>
+  <p align="center">
+  <img width="100px" src="https://github.com/edouard-lopez/Hanzi-Pinyin-Font/blob/master//resources/tpl/annotation-left-downward.png?raw=true" alt="Schematic image"/>
+  <img width="100px" src="https://github.com/edouard-lopez/Hanzi-Pinyin-Font/blob/master//resources/tpl/annotation-left-upward.png?raw=true" alt="Schematic image"/>
+  </p>
+  <p align="center">
+  <img width="100px" src="https://github.com/edouard-lopez/Hanzi-Pinyin-Font/blob/master//resources/tpl/annotation-right-downward.png?raw=true" alt="Schematic image"/>
+  <img width="100px" src="https://github.com/edouard-lopez/Hanzi-Pinyin-Font/blob/master//resources/tpl/annotation-right-upward.png?raw=true" alt="Schematic image"/>
+</p>
+
+And flexibility for other variants.
+
 ## Requirements
 
 * `nodejs`, [`NPM`](http://npmjs.org/) ;
