@@ -2,7 +2,7 @@
   "name": "hanzi-pinyin-font",
   "description": "Project to create a Chinese font displaying Hanzi (汉字) characters followed by transliteration/pronunciation (Pīnyīn)",
   "main": "index.js",
-  "author": "Édouard Lopez",
+  "author": [ "Édouard Lopez", "Hugo Lopez"],
   "scripts": {
     "start": "node --require babel-core/register ./index.js",
     "test": "ava test ; xo"
