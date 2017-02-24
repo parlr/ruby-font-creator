@@ -19,6 +19,7 @@
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-stage-2": "^6.13.0",
     "babel-runtime": "^6.11.6",
+    "del": "^2.2.2",
     "jsdom": "^9.5.0",
     "webpack": "^1.13.2",
     "xo": "^0.17.1"
