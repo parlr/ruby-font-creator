@@ -10,8 +10,8 @@ test('should extract path data', t => {
 	t.is(data, 'M22.64 50.17Q15.01…');
 });
 
-test('should create svg path with text', t => {
-	const chinese = '北京';
+test('should create svg <path> with text', t => {
+	const chinese = '北';
 
 	const doc = ruby.text(chinese);
 	const data = ruby.getData(doc);
@@ -19,8 +19,8 @@ test('should create svg path with text', t => {
 	t.is(data.length > 0, true);
 });
 
-test('should create svg path with annotation', t => {
-	const annotation = 'běijīng';
+test('should create svg <path> with annotation', t => {
+	const annotation = 'běi';
 
 	const doc = ruby.annotation(annotation);
 	const data = ruby.getData(doc);
