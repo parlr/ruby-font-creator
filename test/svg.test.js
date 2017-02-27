@@ -1,6 +1,7 @@
 import fs from 'fs';
 import test from 'ava';
 import del from 'del';
+import jsdom from 'jsdom';
 import svg from '../src/svg';
 
 test.afterEach.always(() => {
@@ -23,4 +24,11 @@ test('should save data to svg file', t => {
 	svg.saveSync(filename, content);
 
 	t.true(fs.statSync(filename).size > 0);
+});
+
+test('wrap()', t => {
+	const xml = svg.wrap('<path>', '<path>');
+
+	const document = jsdom.jsdom(xml);
+	t.is(document.querySelectorAll('path').length, 2);
 });
