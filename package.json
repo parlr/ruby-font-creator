@@ -9,6 +9,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "jsonfile": "^2.4.0",
     "text-to-svg": "^3.0.1",
     "webfont": "^7.0.0"
   },
