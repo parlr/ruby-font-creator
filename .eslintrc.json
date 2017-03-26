@@ -1,12 +1,9 @@
 {
-  "env": {
-	"node": true,
-	"es6": true
-  },
-  "plugins": [
-	"ava"
+    "extends": [
+			"airbnb-base",
+      "prettier"
   ],
-  "extends": [
-	"xo"
-  ]
+    "plugins": [
+        "import"
+    ]
 }
