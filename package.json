@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node --require babel-core/register ./index.js",
     "test": "ava test",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged npm test"
   },
   "dependencies": {
     "global": "4.3.x",
