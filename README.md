@@ -13,16 +13,18 @@ Font builder to help students of Chinese learn to read faster. In order to do so
 
 **Requirements**:  `nodejs`, [`NPM`](http://npmjs.org/).
 
-	npm install 
+	npm install
 
 ## Usage
 
+**Requirements:** `JSON` file describing _glyph_-_prononciation_ relation in [src/data.json](src/data.json).
+
 	npm start
-	
+
 ## Font
 
 This project use [Noto Sans CJK](https://github.com/googlei18n/noto-cjk) as it [support Chinese and is under open licence](https://www.wikiwand.com/en/Noto_fonts).
 
-## License 
+## License
 
 > [Apache License 2.0](http://choosealicense.com/licenses/apache-2.0/)
