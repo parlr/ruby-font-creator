@@ -1,12 +1,28 @@
 # Hanzi-pinyin-font
 
-> I'm **restarting the project**, informations below might not accurate while this message is present. 
-
 Font builder to help students of Chinese learn to read faster. In order to do so we created a font that append both the Character (漢字) and the pronociation (pīnyīn).
 
-| top  | bottom | left-downward | left-upward | right-downward | right-upward |
-| ------- | ---------------- | ------- | ---------------- | ------- | ---------------- |
-| ![](resources/tpl/annotation-top.png)  | ![bottom](resources/tpl/annotation-bottom.png) | ![left-downward](resources/tpl/annotation-left-downward.png) | ![left-upward](resources/tpl/annotation-left-upward.png) | ![right-downward](resources/tpl/annotation-right-downward.png) | ![right-upward](resources/tpl/annotation-right-upward.png) |
+### Features
+
+<style>
+	.wip {color: orange; font-size: 1.75rem; font-weight: normal }
+	.done {color: #0e8a16; font-size: 1.75rem; }
+	.todo {color: #d93f0b; font-size: 1.75rem; }
+</style>
+
+| ruby position-direction | preview | state | comments
+| --- | :---: | :---: | --- |
+| top | ![top](resources/tpl/annotation-top.png)  | <b class="wip">★</b> | work in progress
+| bottom| ![bottom](resources/tpl/annotation-bottom.png)  | <b class="todo">✖</b> | todo
+| left-downward| ![left-downward](resources/tpl/annotation-left-downward.png)  | <b class="todo">✖</b> | todo
+| left-upward| ![left-upward](resources/tpl/annotation-left-upward.png)  | <b class="todo">✖</b> | todo
+| right-downward| ![right-downward](resources/tpl/annotation-right-downward.png)  | <b class="todo">✖</b> | todo
+| right-upward| ![right-upward](resources/tpl/annotation-right-upward.png)  | <b class="todo">✖</b> | todo
+
+**Legend:**
+<b class="todo">✖</b>→
+<b class="wip">★</b>→
+<b class="done">✔</b>
 
 
 ## Install
