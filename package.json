@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "jsonfile": "2.4.x",
+    "jsdom": "9.12.x",
     "text-to-svg": "^3.1.0",
     "webfont": "7.1.x"
   },
@@ -27,7 +28,6 @@
     "eslint-config-prettier": "^1.5.0",
     "eslint-plugin-import": "^2.2.0",
     "husky": "0.13.x",
-    "jsdom": "9.12.x",
     "lint-staged": "3.4.x",
     "prettier": "0.22.x"
   },
