@@ -50,7 +50,6 @@ function writeFont(content, destination) {
 }
 
 function generateFontFiles(content, config) {
-  // config.formats = ['svg', 'ttf', 'eot', 'woff', 'woff2'];
   config.formats.map(format => {
     writeFont(content[format], `${config.destFilename}.${format}`)
       .then(() => {

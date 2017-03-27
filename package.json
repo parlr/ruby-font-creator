@@ -9,7 +9,6 @@
     "precommit": "lint-staged npm test"
   },
   "dependencies": {
-    "global": "4.3.x",
     "jsonfile": "2.4.x",
     "text-to-svg": "^3.1.0",
     "webfont": "7.1.x"
