@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/parlr/Hanzi-Pinyin-Font.svg?branch=master)](https://travis-ci.org/parlr/Hanzi-Pinyin-Font)
+
 # Hanzi-pinyin-font
 
 Font builder to help students of Chinese learn to read faster. In order to do so we created a font that append both the Character (漢字) and the pronociation (pīnyīn).
