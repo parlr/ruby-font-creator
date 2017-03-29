@@ -7,7 +7,7 @@ import svg from "./src/svg";
 import layout from "./src/layouts";
 
 function prepare(config) {
-  fs.mkdir(config.workingDir, 0o700, err => {
+  fs.mkdir(`${config.workingDir}`, 0o700, err => {
     if (err) {
       console.log("already exists");
     }
@@ -69,7 +69,7 @@ function start(filepath = "src/data.json") {
 
     const config = {
       inputFiles: "./build/**/*.svg",
-      workingDir: "./build",
+      workingDir: "./build/svg",
       fontName: "hpf",
       destFilename: path.resolve("./build/hpf"),
       formats: ["svg", "ttf", "eot", "woff", "woff2"]
