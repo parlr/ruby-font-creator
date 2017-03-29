@@ -6,25 +6,19 @@ Font builder to help students of Chinese learn to read faster. In order to do so
 
 ### Features
 
-<style>
-	.wip {color: orange; font-size: 1.75rem; font-weight: normal }
-	.done {color: #0e8a16; font-size: 1.75rem; }
-	.todo {color: #d93f0b; font-size: 1.75rem; }
-</style>
-
 | ruby position-direction | preview | state | comments
 | --- | :---: | :---: | --- |
-| top | ![top](resources/tpl/annotation-top.png)  | <b class="wip">★</b> | work in progress
-| bottom| ![bottom](resources/tpl/annotation-bottom.png)  | <b class="todo">✖</b> | todo
-| left-downward| ![left-downward](resources/tpl/annotation-left-downward.png)  | <b class="todo">✖</b> | todo
-| left-upward| ![left-upward](resources/tpl/annotation-left-upward.png)  | <b class="todo">✖</b> | todo
-| right-downward| ![right-downward](resources/tpl/annotation-right-downward.png)  | <b class="todo">✖</b> | todo
-| right-upward| ![right-upward](resources/tpl/annotation-right-upward.png)  | <b class="todo">✖</b> | todo
+| top | ![top](resources/tpl/annotation-top.png)  | **★** | work in progress
+| bottom| ![bottom](resources/tpl/annotation-bottom.png)  | **✖** | todo
+| left-downward| ![left-downward](resources/tpl/annotation-left-downward.png)  | **✖** | todo
+| left-upward| ![left-upward](resources/tpl/annotation-left-upward.png)  | **✖** | todo
+| right-downward| ![right-downward](resources/tpl/annotation-right-downward.png)  | **✖** | todo
+| right-upward| ![right-upward](resources/tpl/annotation-right-upward.png)  | **✖** | todo
 
 **Legend:**
-<b class="todo">✖</b>→
-<b class="wip">★</b>→
-<b class="done">✔</b>
+**✖**→
+**★**→
+**✔**
 
 
 ## Install
