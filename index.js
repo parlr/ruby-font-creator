@@ -20,7 +20,7 @@ function generateSvg(data, config) {
     const char = data[datum];
     const svgContent = svg.wrap([
       ruby.text(char.glyph, layout.bottom.glyph(options)),
-      ruby.annotation(char.phonetic, layout.top.phonetic(options))
+      ruby.annotation(char.ruby, layout.top.ruby(options))
     ]);
     svg.save(`${config.workingDir}/${char.glyph}.svg`, svgContent);
   }
@@ -70,9 +70,9 @@ function start(filepath = "src/data.json") {
     const config = {
       inputFiles: "./build/**/*.svg",
       workingDir: "./build/svg",
-      fontName: "hpf",
-      destFilename: path.resolve("./build/hpf"),
-      formats: ["svg", "ttf", "eot", "woff", "woff2"]
+      fontName: "Hanzi-Pinyin-Font",
+      destFilename: path.resolve("./build/svg"),
+      formats: ["ttf", "eot", "woff", "woff2"]
     };
 
     prepare(config);
