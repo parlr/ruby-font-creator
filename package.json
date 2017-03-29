@@ -4,15 +4,16 @@
   "main": "index.js",
   "author": "Édouard Lopez",
   "scripts": {
-    "start": "node --require babel-core/register ./index.js",
+    "start": "node --max_old_space_size=8192 --optimize_for_size --max_executable_size=4096 --stack_size=4096 --require babel-core/register ./index.js",
     "test": "ava test",
     "precommit": "lint-staged npm test"
   },
   "dependencies": {
-    "jsonfile": "2.4.x",
     "jsdom": "9.12.x",
+    "jsonfile": "2.4.x",
+    "node-tsv-json": "^0.2.1",
     "text-to-svg": "^3.1.0",
-    "webfont": "7.1.x"
+    "webfont": "^7.1.1"
   },
   "devDependencies": {
     "ava": "0.18.x",

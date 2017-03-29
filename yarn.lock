@@ -224,6 +224,10 @@ async-each@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
 
+async-throttle@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/async-throttle/-/async-throttle-1.1.0.tgz#229e7f3fa7a2a797e86f360e6309a08224d4fa7a"
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -988,6 +992,10 @@ bufferstreams@^1.1.0:
 builtin-modules@^1.0.0, builtin-modules@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-1.1.1.tgz#270f076c5a72c02f5b65a47df94c5fe3a278892f"
+
+byline@~4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/byline/-/byline-4.1.1.tgz#d0d516935eb6761f8be31b5263f76c4640a041a3"
 
 caching-transform@^1.0.0:
   version "1.0.1"
@@ -2944,6 +2952,12 @@ node-status-codes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/node-status-codes/-/node-status-codes-1.0.0.tgz#5ae5541d024645d32a58fcddc9ceecea7ae3ac2f"
 
+node-tsv-json@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/node-tsv-json/-/node-tsv-json-0.2.1.tgz#45492254428127116f03a1cef31e6555794cce5a"
+  dependencies:
+    byline "~4.1.1"
+
 "nopt@2 || 3", nopt@~3.0.6:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-3.0.6.tgz#c6465dbf08abcd4db359317f79ac68a646b28ff9"
@@ -4131,10 +4145,11 @@ verror@1.3.6:
   dependencies:
     extsprintf "1.0.2"
 
-webfont@7.1.x:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/webfont/-/webfont-7.1.0.tgz#8e678d1937ce1408c22469602198e3b8020c8e40"
+webfont@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/webfont/-/webfont-7.1.1.tgz#a1596a8555508def5a53b87c1fc305e2078a770e"
   dependencies:
+    async-throttle "^1.1.0"
     cosmiconfig "^2.0.0"
     globby "^6.0.0"
     meow "^3.3.0"
