@@ -1,6 +1,6 @@
 export default {
   top: {
-    phonetic: options => ({
+    ruby: options => ({
       x: options.width / 2,
       y: -1,
       fontSize: 16,
