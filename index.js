@@ -72,7 +72,7 @@ function start(filepath = "src/data.json") {
       workingDir: "./build/svg",
       fontName: "Hanzi-Pinyin-Font",
       destFilename: path.resolve("./build/svg"),
-      formats: ["ttf", "eot", "woff", "woff2"]
+      formats: ["ttf", "woff2"]
     };
 
     prepare(config);
