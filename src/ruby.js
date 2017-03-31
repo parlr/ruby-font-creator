@@ -1,16 +1,19 @@
 import TextToSVG from "text-to-svg";
 import jsdom from "jsdom";
 
-const textToSVG = TextToSVG.loadSync();
-
 export default {
   rightDownward: "matrix(0,1,-1,0,0,0)",
   rightUpward: "matrix(0,-1,1,0,0,0)",
-  text(chinese = "汉字", options) {
-    return textToSVG.getPath(chinese, options);
+  converter: null,
+  loadFont(fontFilepath) {
+    this.converter = TextToSVG.loadSync(fontFilepath);
+    return this.converter;
   },
-  annotation(pinyin = "hanzi", options) {
-    return textToSVG.getPath(pinyin, options);
+  text(glyph = "汉字", options) {
+    return this.converter.getPath(glyph, options);
+  },
+  annotation(annotation = "hanzi", options) {
+    return this.converter.getPath(annotation, options);
   },
   getData(doc) {
     const svg = jsdom.jsdom(doc);
