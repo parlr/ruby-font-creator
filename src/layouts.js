@@ -5,7 +5,7 @@ export default {
       y: -1,
       fontSize: 16,
       anchor: "top center",
-      attributes: { fill: "grey", stroke: "grey", id: "annotation" }
+      attributes: { fill: "black", stroke: "black", id: "annotation" }
     })
   },
   base: {
