@@ -9,6 +9,7 @@ import layout from "./src/layouts";
 
 const config = {
   dataSource: "src/data.json",
+  fontFilepath: "./resources/fonts/DroidSansFallbackFull.ttf",
   canvas: { width: 80, height: 80 },
   inputFiles: "./build/**/*.svg",
   workingDir: "./build/svg",
@@ -18,14 +19,14 @@ const config = {
 };
 
 function generateSvg(data, config) {
-  const converter = ruby.loadFont("./resources/fonts/NotoSansTC-Regular.otf");
+  const engine = ruby.loadFont(config.fontFilepath);
 
   for (let datum = 0; datum < data.length; datum += 1) {
     const char = data[datum];
     const svgContent = svg.wrap(
-      ruby.getBase(converter, char.glyph, layout.base.bottom(config.canvas)),
+      ruby.getBase(engine, char.glyph, layout.base.bottom(config.canvas)),
       ruby.getAnnotation(
-        converter,
+        engine,
         char.ruby,
         layout.annotation.top(config.canvas)
       )

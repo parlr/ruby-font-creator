@@ -7,7 +7,7 @@ test("verify layout.annotation.top attributes", t => {
 
   t.deepEqual(attributes, {
     x: 40,
-    y: -1,
+    y: -4,
     fontSize: 16,
     anchor: "top center",
     attributes: { id: "annotation", fill: "black", stroke: "black" }
@@ -19,8 +19,8 @@ test("verify layout.base.bottom attributes", t => {
 
   t.deepEqual(attributes, {
     x: 40,
-    y: 82,
-    fontSize: 72,
+    y: 92,
+    fontSize: 70,
     anchor: "bottom center",
     attributes: { id: "glyph", fill: "black", stroke: "black" }
   });
