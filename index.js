@@ -41,7 +41,7 @@ function start(filepath = "src/data.json") {
       inputFiles: "./build/**/*.svg",
       workingDir: "./build/svg",
       fontName: "Hanzi-Pinyin-Font",
-      destFilename: path.resolve("./build/svg"),
+      destFilename: path.resolve("./build/Hanzi-Pinyin-Font"),
       formats: ["ttf", "woff2"]
     };
 
