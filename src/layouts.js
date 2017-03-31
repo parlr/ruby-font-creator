@@ -5,7 +5,7 @@ export default {
       y: -1,
       fontSize: 16,
       anchor: "top center",
-      attributes: { fill: "grey", stroke: "grey" }
+      attributes: { fill: "grey", stroke: "grey", id: "annotation" }
     })
   },
   bottom: {
@@ -14,7 +14,7 @@ export default {
       y: options.height + 2,
       fontSize: 72,
       anchor: "bottom center",
-      attributes: { fill: "black", stroke: "black" }
+      attributes: { fill: "black", stroke: "black", id: "glyph" }
     })
   }
 };
