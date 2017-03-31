@@ -19,8 +19,8 @@ function generateSvg(data, config) {
   for (let datum = 0; datum < data.length; datum += 1) {
     const char = data[datum];
     const svgContent = svg.wrap(
-      ruby.getBase(char.glyph, layout.bottom.glyph(options)),
-      ruby.getAnnotation(char.ruby, layout.top.annotation(options))
+      ruby.getBase(char.glyph, layout.base.bottom(options)),
+      ruby.getAnnotation(char.ruby, layout.annotation.top(options))
     );
     svg.save(`${config.workingDir}/${char.glyph}.svg`, svgContent);
   }

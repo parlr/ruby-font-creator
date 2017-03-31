@@ -1,6 +1,6 @@
 export default {
-  top: {
-    annotation: options => ({
+  annotation: {
+    top: options => ({
       x: options.width / 2,
       y: -1,
       fontSize: 16,
@@ -8,8 +8,8 @@ export default {
       attributes: { fill: "grey", stroke: "grey", id: "annotation" }
     })
   },
-  bottom: {
-    glyph: options => ({
+  base: {
+    bottom: options => ({
       x: options.width / 2,
       y: options.height + 2,
       fontSize: 72,
