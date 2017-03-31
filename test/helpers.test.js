@@ -4,20 +4,32 @@ import fs from "fs";
 import helpers from "../src/helpers";
 
 test("prepare()", t => {
-  const config = { workingDir: "/tmp/whatever" };
+  const config = { workingDir: ".whatever" };
 
   helpers.prepare(config).then(() => {
-    t.true(fs.statSync(config.workingDir));
+    t.true(fs.stat(config.workingDir));
     fs.rmdir(config.workingDir);
   });
 });
 
 test("writeFont()", t => {
   const content = "hello";
-  const destination = "/tmp/whatever.txt";
+  const destination = ".whatever.txt";
 
   helpers.writeFont(content, destination).then(() => {
-    t.true(fs.statSync(destination));
+    t.true(fs.stat(destination));
     fs.unlink(destination);
+  });
+});
+
+test("generateFontFiles()", t => {
+  const content = {
+    ttf: "font-data"
+  };
+  const config = { formats: ["otf"], destFilename: ".whatever" };
+
+  helpers.generateFontFiles(content, config).then(() => {
+    t.true(fs.stat(`${config.destFilename}.otf`));
+    fs.unlink(`${config.destFilename}.otf`);
   });
 });

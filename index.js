@@ -34,18 +34,6 @@ function buildFont(config) {
     });
 }
 
-function generateFontFiles(content, config) {
-  config.formats.map(format =>
-    helpers
-      .writeFont(content[format], `${config.destFilename}.${format}`)
-      .then(() => {
-        console.log(`wrote: ${config.destFilename}.${format}`);
-      })
-      .catch(err => {
-        console.log(`failed to write ${config.destFilename}.${format}`, err);
-      }));
-}
-
 function start(filepath = "src/data.json") {
   jsonfile.readFile(filepath, (err, data) => {
     if (err) {
@@ -62,7 +50,7 @@ function start(filepath = "src/data.json") {
 
     helpers.prepare(config);
     generateSvg(data, config);
-    buildFont(config).then(fontData => generateFontFiles(fontData, config));
+    buildFont(config); //.then(fontData => helpers.generateFontFiles(fontData, config));
   });
 }
 
