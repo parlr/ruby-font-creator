@@ -10,7 +10,7 @@ test("verify layout.annotation.top attributes", t => {
     y: -1,
     fontSize: 16,
     anchor: "top center",
-    attributes: { fill: "grey", stroke: "grey", id: "annotation" }
+    attributes: { id: "annotation", fill: "black", stroke: "black" }
   });
 });
 
@@ -22,6 +22,6 @@ test("verify layout.base.bottom attributes", t => {
     y: 82,
     fontSize: 72,
     anchor: "bottom center",
-    attributes: { fill: "black", stroke: "black", id: "glyph" }
+    attributes: { id: "glyph", fill: "black", stroke: "black" }
   });
 });
