@@ -34,21 +34,10 @@ function buildFont(config) {
     });
 }
 
-function writeFont(content, destination) {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(destination, content, error => {
-      if (error) {
-        return reject(new Error(error));
-      }
-
-      return resolve();
-    });
-  });
-}
-
 function generateFontFiles(content, config) {
   config.formats.map(format =>
-    writeFont(content[format], `${config.destFilename}.${format}`)
+    helpers
+      .writeFont(content[format], `${config.destFilename}.${format}`)
       .then(() => {
         console.log(`wrote: ${config.destFilename}.${format}`);
       })

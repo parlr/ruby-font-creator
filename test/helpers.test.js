@@ -11,3 +11,13 @@ test("prepare()", t => {
     fs.rmdir(config.workingDir);
   });
 });
+
+test("writeFont()", t => {
+  const content = "hello";
+  const destination = "/tmp/whatever.txt";
+
+  helpers.writeFont(content, destination).then(() => {
+    t.true(fs.statSync(destination));
+    fs.unlink(destination);
+  });
+});
