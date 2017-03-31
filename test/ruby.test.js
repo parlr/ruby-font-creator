@@ -17,18 +17,18 @@ test("should extract path data", t => {
 });
 
 test("should create svg <path> with text", t => {
-  const chinese = "北";
+  const glyph = "北";
 
-  const doc = ruby.base(chinese);
+  const doc = ruby.getBase(glyph);
   const data = ruby.getData(doc);
 
   t.is(data.length > 0, true);
 });
 
 test("should create svg <path> with annotation", t => {
-  const annotation = "běi";
+  const text = "běi";
 
-  const doc = ruby.annotation(annotation);
+  const doc = ruby.getAnnotation(text);
   const data = ruby.getData(doc);
 
   t.is(data.length > 0, true);
