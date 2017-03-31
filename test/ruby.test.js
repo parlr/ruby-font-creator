@@ -19,7 +19,7 @@ test("should extract path data", t => {
 test("should create svg <path> with text", t => {
   const chinese = "北";
 
-  const doc = ruby.text(chinese);
+  const doc = ruby.base(chinese);
   const data = ruby.getData(doc);
 
   t.is(data.length > 0, true);

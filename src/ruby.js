@@ -9,7 +9,7 @@ export default {
     this.converter = TextToSVG.loadSync(fontFilepath);
     return this.converter;
   },
-  text(glyph = "汉字", options) {
+  base(glyph = "汉字", options) {
     return this.converter.getPath(glyph, options);
   },
   annotation(annotation = "hanzi", options) {
