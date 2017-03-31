@@ -2,7 +2,13 @@ import fs from "fs";
 
 export default {
   prepare(config) {
-    return new Promise(resolve => fs.mkdir(`${config.workingDir}`, resolve()));
+    return new Promise((resolve, reject) =>
+      fs.mkdir(`${config.workingDir}`, err => {
+        if (err && err.code !== "EEXIST") {
+          reject();
+        }
+        resolve();
+      }));
   },
   writeFont(content, destination) {
     return new Promise((resolve, reject) => {
