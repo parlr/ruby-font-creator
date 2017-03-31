@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node --max_old_space_size=8192 --optimize_for_size --max_executable_size=4096 --stack_size=4096 --require babel-core/register ./index.js",
     "test": "ava test",
-    "precommit": "lint-staged npm test"
+    "precommit": "npm test"
   },
   "dependencies": {
     "jsdom": "9.12.x",
@@ -28,9 +28,7 @@
     "eslint-config-airbnb-base": "^11.1.2",
     "eslint-config-prettier": "^1.5.0",
     "eslint-plugin-import": "^2.2.0",
-    "husky": "0.13.x",
-    "lint-staged": "3.4.x",
-    "prettier": "0.22.x"
+    "husky": "0.13.x"
   },
   "ava": {
     "require": [
@@ -47,11 +45,5 @@
       "transform-runtime"
     ],
     "comments": false
-  },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ]
   }
 }
