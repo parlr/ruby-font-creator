@@ -46,15 +46,14 @@ function writeFont(content, destination) {
 }
 
 function generateFontFiles(content, config) {
-  config.formats.map(format => {
+  config.formats.map(format =>
     writeFont(content[format], `${config.destFilename}.${format}`)
       .then(() => {
         console.log(`wrote: ${config.destFilename}.${format}`);
       })
       .catch(err => {
         console.log(`failed to write ${config.destFilename}.${format}`, err);
-      });
-  });
+      }));
 }
 
 function start(filepath = "src/data.json") {
