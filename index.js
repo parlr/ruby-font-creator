@@ -1,4 +1,3 @@
-import fs from "fs";
 import webfont from "webfont";
 import path from "path";
 import jsonfile from "jsonfile";
@@ -29,9 +28,7 @@ function buildFont(config) {
     startunicode: 0x3400
   })
     .then(content => content)
-    .catch(err => {
-      console.log(err);
-    });
+    .catch(err => console.log(err));
 }
 
 function start(filepath = "src/data.json") {
