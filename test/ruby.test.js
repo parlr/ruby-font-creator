@@ -17,18 +17,20 @@ test("should extract path data", t => {
 });
 
 test("should create svg <path> with text", t => {
+  const converter = ruby.loadFont("./resources/fonts/NotoSansTC-Regular.otf");
   const glyph = "北";
 
-  const doc = ruby.getBase(glyph);
+  const doc = ruby.getBase(converter, glyph);
   const data = ruby.getData(doc);
 
   t.is(data.length > 0, true);
 });
 
 test("should create svg <path> with annotation", t => {
+  const converter = ruby.loadFont("./resources/fonts/NotoSansTC-Regular.otf");
   const text = "běi";
 
-  const doc = ruby.getAnnotation(text);
+  const doc = ruby.getAnnotation(converter, text);
   const data = ruby.getData(doc);
 
   t.is(data.length > 0, true);

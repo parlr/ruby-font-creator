@@ -16,11 +16,14 @@ function prepare(config) {
 
 function generateSvg(data, config) {
   const options = { width: 80, height: 80 };
+  const converter = ruby.loadFont("./resources/fonts/NotoSansTC-Regular.otf");
+
   for (let datum = 0; datum < data.length; datum += 1) {
     const char = data[datum];
     const svgContent = svg.wrap(
-      ruby.getBase(char.glyph, layout.base.bottom(options)),
-      ruby.getAnnotation(char.ruby, layout.annotation.top(options))
+      ruby.getBase(converter, char.glyph, layout.base.bottom(options)),
+      ruby.getAnnotation(converter, char.ruby, layout.annotation.top(options))
+    );
     );
     svg.save(`${config.workingDir}/${char.glyph}.svg`, svgContent);
   }
