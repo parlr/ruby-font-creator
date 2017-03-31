@@ -2,17 +2,10 @@ import fs from "fs";
 import webfont from "webfont";
 import path from "path";
 import jsonfile from "jsonfile";
+import helpers from "./src/helpers";
 import ruby from "./src/ruby";
 import svg from "./src/svg";
 import layout from "./src/layouts";
-
-function prepare(config) {
-  fs.mkdir(`${config.workingDir}`, 0o700, err => {
-    if (err) {
-      console.log("already exists");
-    }
-  });
-}
 
 function generateSvg(data, config) {
   const options = { width: 80, height: 80 };
@@ -78,7 +71,7 @@ function start(filepath = "src/data.json") {
       formats: ["ttf", "woff2"]
     };
 
-    prepare(config);
+    helpers.prepare(config);
     generateSvg(data, config);
     buildFont(config).then(fontData => generateFontFiles(fontData, config));
   });
