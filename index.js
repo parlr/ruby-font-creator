@@ -25,7 +25,8 @@ function generateSvg(data, config) {
 function buildFont(config) {
   return webfont({
     files: config.inputFiles,
-    fontName: config.fontName
+    fontName: config.fontName,
+    startunicode: 0x3400
   })
     .then(content => content)
     .catch(err => {
