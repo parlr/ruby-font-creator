@@ -1,0 +1,3 @@
+[submodule "chinese-data"]
+	path = chinese-data
+	url = git@github.com:parlr/chinese-data.git
