@@ -40,3 +40,8 @@ This project use [Noto Sans CJK](https://github.com/googlei18n/noto-cjk) as it [
 ## License
 
 > [Apache License 2.0](http://choosealicense.com/licenses/apache-2.0/)
+
+## Contributors
+
+* [Édouard Lopez](https://github.com/edouard-lopez/) ;
+* [Hugo Lopez](https://github.com/hugolpz)
