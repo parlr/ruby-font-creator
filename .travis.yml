@@ -4,3 +4,5 @@ node_js:
 cache: yarn
 git:
   submodules: false
+before_script:
+    - bash ./test/fetch-fonts.bash
