@@ -15,7 +15,9 @@ function generateSvg(data, config) {
       ruby.getBase(engine, char.glyph, config.layout.base),
       ruby.getAnnotation(engine, char.ruby, config.layout.annotation)
     );
-    svg.save(`${config.workingDir}/${char.glyph}.svg`, svgContent);
+
+    const unicode = char.codepoint.replace("U+", "u");
+    svg.save(`${config.workingDir}/${unicode}-${char.glyph}.svg`, svgContent);
   }
 }
 
