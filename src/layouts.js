@@ -3,7 +3,7 @@ export default {
     top: options => ({
       x: options.width / 2,
       y: -4,
-      fontSize: 16,
+      fontSize: 28,
       anchor: "top center",
       attributes: { fill: "black", stroke: "black", id: "annotation" }
     })
@@ -12,7 +12,7 @@ export default {
     bottom: options => ({
       x: options.width / 2,
       y: options.height + 12,
-      fontSize: 70,
+      fontSize: 56,
       anchor: "bottom center",
       attributes: { fill: "black", stroke: "black", id: "glyph" }
     })
