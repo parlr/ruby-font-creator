@@ -19,15 +19,15 @@ Font creator to help students **learn and read foreign languages faster** by app
 
 ## Install
 
-**Requirements**:  `nodejs`, [`NPM`](http://npmjs.org/).
+**Requirements**:  `nodejs`, [`yarn`](http://yarnpkg.com/) or [`npm`](http://npmjs.org/).
 
-	npm install
+	yarn install
 
 ## Usage
 
 **Requirements:** a `JSON` file describing _glyph_-_codepoint_-_pronunciation_ tuple (e.g.  [src/data.json](src/data.json)).
 
-	npm start
+	yarn start
 
 ## Font
 
