@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/parlr/Hanzi-Pinyin-Font.svg?branch=master)](https://travis-ci.org/parlr/Hanzi-Pinyin-Font)
+[![Build Status](https://travis-ci.org/parlr/ruby-font-creator.svg?branch=master)](https://travis-ci.org/parlr/Hanzi-Pinyin-Font)
 
 # Ruby Font Creator
 
