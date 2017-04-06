@@ -2,18 +2,14 @@
 
 # Ruby Font Creator
 
-Font builder to help students of Chinese learn to read faster. In order to do so we created a font that append both the Character (漢字) and the pronociation (pīnyīn).
+Font creator to help students **learn and read foreign languages faster** by appending pronunciation or meaning to each glyph.
 
 ### Features
 
-| ruby position-direction | preview | state | comments
-| --- | :---: | :---: | --- |
-| top | ![top](resources/tpl/annotation-top.png)  | **★** | work in progress
-| bottom| ![bottom](resources/tpl/annotation-bottom.png)  | **✖** | todo
-| left-downward| ![left-downward](resources/tpl/annotation-left-downward.png)  | **✖** | todo
-| left-upward| ![left-upward](resources/tpl/annotation-left-upward.png)  | **✖** | todo
-| right-downward| ![right-downward](resources/tpl/annotation-right-downward.png)  | **✖** | todo
-| right-upward| ![right-upward](resources/tpl/annotation-right-upward.png)  | **✖** | todo
+| languages | preview | state | repository | base-font
+| --- | :---: | :---: | --- | --- |
+| Chinese | ![top](resources/tpl/annotation-top.png)  | **✔** | [hanzi-pinyin-font](https://github.com/parlr/hanzi-pinyin-font/releases) | [DroidSansFallbackFull](https://github.com/parlr/platform_frameworks_base/blob/562c45cc841681ed80d4e94515b23c28eb60eae4/data/fonts/DroidSansFallbackFull.ttf)
+| :speaking_head: [request new one](https://github.com/parlr/ruby-font-creator/issues/new) | - | - | - | provide an open-source font |
 
 **Legend:**
 **✖**→
@@ -35,7 +31,11 @@ Font builder to help students of Chinese learn to read faster. In order to do so
 
 ## Font
 
-This project use [Noto Sans CJK](https://github.com/googlei18n/noto-cjk) as it [support Chinese and is under open licence](https://www.wikiwand.com/en/Noto_fonts).
+This project use fonts under open-source licenses :
+[DejaVuSans](https://github.com/TFTFonts/DejaVuSans),
+[DroidSansFallbackFull](https://github.com/parlr/platform_frameworks_base/blob/562c45cc841681ed80d4e94515b23c28eb60eae4/data/fonts/DroidSansFallbackFull.ttf),
+[Noto Sans CJK](https://github.com/nodebox/opentype.js/issues/273),
+
 
 ## License
 
