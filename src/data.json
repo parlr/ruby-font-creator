@@ -1,10 +1,5 @@
 [
   {
-    "codepoint": "U+3401",
-    "ruby": "tiàn",
-    "glyph": "㐁"
-  },
-  {
     "codepoint": "U+03B1",
     "ruby": "alpha",
     "glyph": "α"
@@ -18,5 +13,105 @@
     "codepoint": "U+FB53",
     "ruby": "B̤ē",
     "glyph": "ﭓ"
+  },
+  {
+    "codepoint": "U+3400",
+    "ruby": "qiū",
+    "glyph": "㐀"
+  },
+  {
+    "codepoint": "U+3401",
+    "ruby": "tiàn",
+    "glyph": "㐁"
+  },
+  {
+    "codepoint": "U+3404",
+    "ruby": "kuà",
+    "glyph": "㐄"
+  },
+  {
+    "codepoint": "U+3405",
+    "ruby": "wǔ",
+    "glyph": "㐅"
+  },
+  {
+    "codepoint": "U+3406",
+    "ruby": "yǐn",
+    "glyph": "㐆"
+  },
+  {
+    "codepoint": "U+340C",
+    "ruby": "yí",
+    "glyph": "㐌"
+  },
+  {
+    "codepoint": "U+3416",
+    "ruby": "xié",
+    "glyph": "㐖"
+  },
+  {
+    "codepoint": "U+341C",
+    "ruby": "chóu",
+    "glyph": "㐜"
+  },
+  {
+    "codepoint": "U+3421",
+    "ruby": "nuò",
+    "glyph": "㐡"
+  },
+  {
+    "codepoint": "U+3424",
+    "ruby": "dān",
+    "glyph": "㐤"
+  },
+  {
+    "codepoint": "U+3428",
+    "ruby": "xù",
+    "glyph": "㐨"
+  },
+  {
+    "codepoint": "U+3429",
+    "ruby": "xíng",
+    "glyph": "㐩"
+  },
+  {
+    "codepoint": "U+342B",
+    "ruby": "xiōng",
+    "glyph": "㐫"
+  },
+  {
+    "codepoint": "U+342C",
+    "ruby": "liú",
+    "glyph": "㐬"
+  },
+  {
+    "codepoint": "U+342D",
+    "ruby": "lǐn",
+    "glyph": "㐭"
+  },
+  {
+    "codepoint": "U+342E",
+    "ruby": "xiāng",
+    "glyph": "㐮"
+  },
+  {
+    "codepoint": "U+342F",
+    "ruby": "yōng",
+    "glyph": "㐯"
+  },
+  {
+    "codepoint": "U+3430",
+    "ruby": "xìn",
+    "glyph": "㐰"
+  },
+  {
+    "codepoint": "U+3431",
+    "ruby": "zhěn",
+    "glyph": "㐱"
+  },
+  {
+    "codepoint": "U+3432",
+    "ruby": "dài",
+    "glyph": "㐲"
   }
 ]
