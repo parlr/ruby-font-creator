@@ -10,7 +10,9 @@
     "build": "node --max_old_space_size=8192 --optimize_for_size --max_executable_size=4096 --stack_size=4096 --require babel-core/register ./index.js",
     "test": "ava test",
     "precommit": "npm test",
-    "reset": "rm build/ -rf; mkdir -p build/svg"
+    "reset": "rm build/ -rf; mkdir -p build/svg",
+    "install-font": "cp build/ruby-font-creator.ttf ~/.local/share/fonts/",
+    "remove-font": "rm --force ~/.local/share/fonts/ruby-font-creator.ttf"
   },
   "dependencies": {
     "jsdom": "9.12.x",
