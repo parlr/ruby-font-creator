@@ -7,7 +7,7 @@
     "Hugo Lopez"
   ],
   "scripts": {
-    "start": "node --max_old_space_size=8192 --optimize_for_size --max_executable_size=4096 --stack_size=4096 --require babel-core/register ./index.js",
+    "build": "node --max_old_space_size=8192 --optimize_for_size --max_executable_size=4096 --stack_size=4096 --require babel-core/register ./index.js",
     "test": "ava test",
     "precommit": "npm test",
     "reset": "rm build/ -rf; mkdir -p build/svg"

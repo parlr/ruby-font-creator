@@ -27,7 +27,7 @@ Font creator to help students **learn and read foreign languages faster** by app
 
 **Requirements:** a `JSON` file describing _glyph_-_codepoint_-_pronunciation_ tuple (e.g.  [src/data.json](src/data.json)).
 
-	yarn start
+	yarn build
 
 ## Font
 
