@@ -3,6 +3,20 @@ import fs from "fs";
 
 import helpers from "../src/helpers";
 
+test("setBuildConfig(): use default config", t => {
+  const argv = {};
+
+  const config = helpers.setBuildConfig(argv);
+  t.truthy(config.layout);
+});
+
+test("setBuildConfig(): use given config", t => {
+  const argv = { config: "bottom" };
+
+  const config = helpers.setBuildConfig(argv);
+  t.is(config.layout.annotation.anchor, "bottom center");
+});
+
 test("prepare()", t => {
   const config = { workingDir: ".whatever" };
 

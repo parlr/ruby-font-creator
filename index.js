@@ -1,10 +1,10 @@
 import webfont from "webfont";
 import jsonfile from "jsonfile";
+import { argv } from "yargs";
 
 import helpers from "./src/helpers";
 import ruby from "./src/ruby";
 import svg from "./src/svg";
-import buildConfig from "./src/config";
 
 function generateSvg(data, config) {
   const engine = ruby.loadFont(config.fontFilepath);
@@ -31,7 +31,9 @@ function buildFont(config) {
     .catch(err => console.log(err));
 }
 
-function start(config) {
+function start(cliArguments) {
+  const config = helpers.setBuildConfig(cliArguments);
+
   jsonfile.readFile(config.dataSource, (err, data) => {
     if (err) {
       throw err;
@@ -44,4 +46,4 @@ function start(config) {
   });
 }
 
-start(buildConfig);
+start(argv);

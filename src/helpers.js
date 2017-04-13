@@ -1,6 +1,15 @@
 import fs from "fs";
 
 export default {
+  setBuildConfig(cliArguments) {
+    let config = require("./config/default").default; // eslint-disable-line global-require
+
+    if (cliArguments.config) {
+      config = require(`./config/${cliArguments.config}`).default; // eslint-disable-line global-require, import/no-dynamic-require
+    }
+
+    return config;
+  },
   prepare(config) {
     return new Promise((resolve, reject) =>
       fs.mkdir(`${config.workingDir}`, err => {

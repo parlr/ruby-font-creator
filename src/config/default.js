@@ -1,12 +1,14 @@
 import path from "path";
-import layout from "./layouts";
+import layout from "../layouts";
 
 export default {
   canvas: { width: 80, height: 80 },
   dataSource: path.resolve("./src/data.json"),
-  destFilename: path.resolve("./build/Hanzi-Pinyin-Font"),
+  get destFilename() {
+    return path.resolve(`./build/${this.fontName}`);
+  },
   fontFilepath: path.resolve("./resources/fonts/DroidSansFallbackFull.ttf"),
-  fontName: "Hanzi-Pinyin-Font",
+  fontName: "ruby-font-creator",
   formats: ["ttf", "woff2"],
   inputFiles: "./build/**/*.svg",
   workingDir: path.resolve("./build/svg"),

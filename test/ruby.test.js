@@ -1,7 +1,7 @@
 import test from "ava";
 
 import ruby from "../src/ruby";
-import buildConfig from "../src/config";
+import buildConfig from "../src/config/default";
 
 test("loadFont()", t => {
   const engine = ruby.loadFont(buildConfig.fontFilepath);

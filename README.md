@@ -30,6 +30,10 @@ Font creator to help students **learn and read foreign languages faster** by app
 
 	yarn build
 
+or specify the config filename to use (without extension):
+
+	yarn build -- --config left-upward
+
 ## Font
 
 This project use fonts under open-source licenses :

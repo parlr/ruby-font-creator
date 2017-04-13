@@ -19,7 +19,8 @@
     "jsonfile": "2.4.x",
     "node-tsv-json": "^0.2.1",
     "text-to-svg": "^3.1.0",
-    "webfont": "^7.1.1"
+    "webfont": "^7.1.1",
+    "yargs": "^7.0.2"
   },
   "devDependencies": {
     "ava": "0.18.x",
