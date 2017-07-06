@@ -30,9 +30,9 @@ Font creator to help students **learn and read foreign languages faster** by app
 
 	yarn build
 
-or specify the config filename to use (without extension):
+**Custom config**:
 
-	yarn build -- --config left-upward
+	yarn build --  --config ./src/config/default.js
 
 **Custom data**:
 

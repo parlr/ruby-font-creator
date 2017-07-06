@@ -12,7 +12,7 @@ export default {
     return newConfig;
   },
   setBuildConfig(cliArguments) {
-    let config = require("./config/default").default; // eslint-disable-line global-require
+    let config = require(path.resolve("./src/config/default.js")).default; // eslint-disable-line global-require, import/no-dynamic-require
 
     if (cliArguments.config) {
       config = require(`${cliArguments.config}`).default; // eslint-disable-line global-require, import/no-dynamic-require
@@ -27,7 +27,8 @@ export default {
           reject();
         }
         resolve();
-      }));
+      })
+    );
   },
   writeFont(content, destination) {
     return new Promise((resolve, reject) => {
@@ -53,7 +54,8 @@ export default {
               `failed to write ${config.destFilename}.${format}`,
               err
             );
-          }));
+          })
+      );
       resolve();
     });
   }
