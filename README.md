@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/parlr/ruby-font-creator.svg?branch=master)](https://travis-ci.org/parlr/Hanzi-Pinyin-Font)
+[![Build Status](https://travis-ci.org/parlr/ruby-font-creator.svg?branch=master)](https://travis-ci.org/parlr/ruby-font-creator)
 [![Code Climate](https://codeclimate.com/github/parlr/ruby-font-creator/badges/gpa.svg)](https://codeclimate.com/github/parlr/ruby-font-creator)
 
 # Ruby Font Creator
