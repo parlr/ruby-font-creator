@@ -52,5 +52,6 @@
       "transform-runtime"
     ],
     "comments": false
-  }
+  },
+  "version": "0.1.0"
 }
