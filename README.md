@@ -34,6 +34,28 @@ or specify the config filename to use (without extension):
 
 	yarn build -- --config left-upward
 
+**Custom data**:
+
+	yarn build --  --data ./path-to/data.json
+
+## Data Structure
+
+A list of objects, each describing a glyph, with the following 3 elements:
+
+1. a unicode `codepoint` ;
+1. a base `glyph` ;
+1. a `ruby` text.
+
+Example:
+
+	[
+	  {
+	    "codepoint": "U+03B1",
+	    "ruby": "alpha",
+	    "glyph": "α"
+	  }
+	]
+
 ## Font
 
 This project use fonts under open-source licenses :

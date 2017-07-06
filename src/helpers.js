@@ -1,11 +1,21 @@
 import fs from "fs";
+import path from "path";
 
 export default {
+  setDataSource(config, cliArguments) {
+    const newConfig = Object.assign({}, config);
+
+    if (cliArguments.data) {
+      newConfig.dataSource = path.resolve(cliArguments.data);
+    }
+
+    return newConfig;
+  },
   setBuildConfig(cliArguments) {
     let config = require("./config/default").default; // eslint-disable-line global-require
 
     if (cliArguments.config) {
-      config = require(`./config/${cliArguments.config}`).default; // eslint-disable-line global-require, import/no-dynamic-require
+      config = require(`${cliArguments.config}`).default; // eslint-disable-line global-require, import/no-dynamic-require
     }
 
     return config;

@@ -3,6 +3,22 @@ import fs from "fs";
 
 import helpers from "../src/helpers";
 
+test("setDataSource(): use default path", t => {
+  const argv = {};
+  const config = { dataSource: "./data.json" };
+
+  const newConfig = helpers.setDataSource(config, argv);
+  t.is(newConfig.dataSource, "./data.json");
+});
+
+test("setDataSource(): use given path", t => {
+  const argv = { data: "/tmp/../tmp/data.json" };
+  const config = { dataSource: "./data.json" };
+
+  const newConfig = helpers.setDataSource(config, argv);
+  t.is(newConfig.dataSource, "/tmp/data.json");
+});
+
 test("setBuildConfig(): use default config", t => {
   const argv = {};
 
@@ -11,7 +27,7 @@ test("setBuildConfig(): use default config", t => {
 });
 
 test("setBuildConfig(): use given config", t => {
-  const argv = { config: "bottom" };
+  const argv = { config: "./config/bottom.js" };
 
   const config = helpers.setBuildConfig(argv);
   t.is(config.layout.annotation.anchor, "bottom center");

@@ -32,7 +32,8 @@ function buildFont(config) {
 }
 
 function start(cliArguments) {
-  const config = helpers.setBuildConfig(cliArguments);
+  let config = helpers.setBuildConfig(cliArguments);
+  config = helpers.setDataSource(config, cliArguments);
 
   jsonfile.readFile(config.dataSource, (err, data) => {
     if (err) {
