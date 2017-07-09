@@ -7,13 +7,14 @@ import ruby from "./src/ruby";
 import svg from "./src/svg";
 
 function generateSvg(data, config) {
-  const engine = ruby.loadFont(config.fontFilepath);
+  const baseEngine = ruby.loadFont(config.baseFontFilepath);
+  const annotationEngine = ruby.loadFont(config.annotationFontFilepath);
 
   for (let datum = 0; datum < data.length; datum += 1) {
     const char = data[datum];
     const svgContent = svg.wrap(
-      ruby.getBase(engine, char.glyph, config.layout.base),
-      ruby.getAnnotation(engine, char.ruby, config.layout.annotation)
+      ruby.getBase(baseEngine, char.glyph, config.layout.base),
+      ruby.getAnnotation(annotationEngine, char.ruby, config.layout.annotation)
     );
 
     const unicode = char.codepoint.replace("U+", "u");
@@ -43,7 +44,8 @@ function start(cliArguments) {
     helpers.prepare(config);
     generateSvg(data, config);
     buildFont(config).then(fontData =>
-      helpers.generateFontFiles(fontData, config));
+      helpers.generateFontFiles(fontData, config)
+    );
   });
 }
 
