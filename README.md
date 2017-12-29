@@ -26,7 +26,7 @@ Font creator to help students **learn and read foreign languages faster** by app
 
 ## Usage
 
-**Requirements:** a `JSON` file describing _glyph_-_codepoint_-_pronunciation_ tuple (e.g.  [src/data.json](src/data.json)).
+**Requirements:** a `JSON` file describing _codepoint_-_glyph_-_gloss_ tuple (e.g.  [src/data.json](src/data.json)).
 
 	yarn build
 
@@ -51,8 +51,8 @@ Example:
 	[
 	  {
 	    "codepoint": "U+03B1",
-	    "ruby": "alpha",
-	    "glyph": "α"
+	    "glyph": "α",
+	    "ruby": "alpha"
 	  }
 	]
 
