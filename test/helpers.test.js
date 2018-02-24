@@ -78,7 +78,11 @@ test('generateFontFiles()', t => {
   }
 
   helpers.generateFontFiles(content, config).then(() => {
-    const directoryPath = path.resolve(`./build`)
+    const buildDirector = './build'
+    if (!fs.existsSync(buildDirector)) {
+      fs.mkdirSync(buildDirector)
+    }
+    const directoryPath = path.resolve(buildDirector)
 
     t.true(fs.stat(`${directoryPath}/RFC-config-font-name.ttf`))
     fs.unlink(`${directoryPath}/RFC-config-font-name.ttf`)
