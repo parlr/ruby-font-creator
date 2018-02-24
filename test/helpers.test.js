@@ -1,7 +1,24 @@
 import test from "ava";
 import fs from "fs";
+import path from "path";
 
 import helpers from "../src/helpers";
+
+test("setFontName(): use name from config file", t => {
+  const argv = {};
+  const config = { fontName: "RFC-config-font-name" };
+
+  const newConfig = helpers.setFontName(config, argv);
+  t.is(newConfig.fontName, "RFC-config-font-name");
+});
+
+test("setFontName(): use name from CLI argument --font-name", t => {
+  const argv = { fontName: "RFC-cli-font-name" };
+  const config = { fontName: "RFC-config-font-name" };
+
+  const newConfig = helpers.setFontName(config, argv);
+  t.is(newConfig.fontName, "RFC-cli-font-name");
+});
 
 test("setDataSource(): use default path", t => {
   const argv = {};

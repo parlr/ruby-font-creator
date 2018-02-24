@@ -35,6 +35,7 @@ function buildFont(config) {
 function start(cliArguments) {
   let config = helpers.setBuildConfig(cliArguments);
   config = helpers.setDataSource(config, cliArguments);
+  config = helpers.setFontName(config, cliArguments);
 
   jsonfile.readFile(config.dataSource, (err, data) => {
     if (err) {
@@ -43,6 +44,7 @@ function start(cliArguments) {
 
     helpers.prepare(config);
     generateSvg(data, config);
+
     buildFont(config).then(fontData =>
       helpers.generateFontFiles(fontData, config)
     );

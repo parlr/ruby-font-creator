@@ -2,6 +2,15 @@ import fs from "fs";
 import path from "path";
 
 export default {
+  setFontName(config, cliArguments) {
+    const newConfig = Object.assign({}, config);
+
+    if (cliArguments.fontName) {
+      newConfig.fontName = cliArguments.fontName;
+    }
+
+    return newConfig;
+  },
   setDataSource(config, cliArguments) {
     const newConfig = Object.assign({}, config);
 
@@ -27,7 +36,7 @@ export default {
           reject();
         }
         resolve();
-      })
+      }),
     );
   },
   writeFont(content, destination) {
