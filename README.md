@@ -32,15 +32,15 @@ Font creator to help students **learn and read foreign languages faster** by app
 
 **Custom config:**
 
-	yarn build --  --config ./src/config/default.js
+	yarn build --config ./src/config/default.js
 
 **Custom data:**
 
-	yarn build --  --data ./path-to/data.json
+	yarn build --data ./path-to/data.json
 
 **Custom Font Name:**
 
-	yarn build --  --font-name 'custom-font-name'
+	yarn build --font-name 'custom-font-name'
 
 :information_source: maintenance tasks available are in the [makefile][./makefile], run `make` to see possible actions.
 
