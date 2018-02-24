@@ -18,23 +18,23 @@ Font creator to help students **learn and read foreign languages faster** by app
 **✔**
 
 
-## Install
+### Install
 
 **Requirements**:  `nodejs`, [`yarn`](http://yarnpkg.com/) or [`npm`](http://npmjs.org/).
 
 	yarn install
 
-## Usage
+### Usage
 
 **Requirements:** a `JSON` file describing _codepoint_-_glyph_-_gloss_ tuple (e.g.  [src/data.json](src/data.json)).
 
 	yarn build
 
-**Custom config**:
+**Custom config:**
 
 	yarn build --  --config ./src/config/default.js
 
-**Custom data**:
+**Custom data:**
 
 	yarn build --  --data ./path-to/data.json
 
@@ -44,7 +44,7 @@ Font creator to help students **learn and read foreign languages faster** by app
 
 :information_source: maintenance tasks available are in the [makefile][./makefile], run `make` to see possible actions.
 
-## Data Structure
+### Data Structure
 
 A list of objects, each describing a glyph, with the following 3 elements:
 
@@ -62,7 +62,7 @@ Example:
 	  }
 	]
 
-## Font
+### Font
 
 This project use fonts under open-source licenses :
 [DejaVuSans](https://github.com/TFTFonts/DejaVuSans),
@@ -70,11 +70,11 @@ This project use fonts under open-source licenses :
 [Noto Sans CJK](https://github.com/nodebox/opentype.js/issues/273).
 
 
-## License
+### License
 
 > [Apache License 2.0](http://choosealicense.com/licenses/apache-2.0/)
 
-## Contributors
+### Contributors
 
 * [Édouard Lopez](https://github.com/edouard-lopez/) ;
 * [Hugo Lopez](https://github.com/hugolpz)
