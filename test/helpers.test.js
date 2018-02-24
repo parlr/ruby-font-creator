@@ -11,7 +11,7 @@ test("setDataSource(): use default path", t => {
   t.is(newConfig.dataSource, "./data.json");
 });
 
-test("setDataSource(): use given path", t => {
+test("setDataSource(): use CLI --data as path", t => {
   const argv = { data: "/tmp/../tmp/data.json" };
   const config = { dataSource: "./data.json" };
 
@@ -26,7 +26,7 @@ test("setBuildConfig(): use default config", t => {
   t.truthy(config.layout);
 });
 
-test("setBuildConfig(): use given config", t => {
+test("setBuildConfig(): use CLI --config", t => {
   const argv = { config: "./config/bottom.js" };
 
   const config = helpers.setBuildConfig(argv);
