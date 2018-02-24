@@ -50,6 +50,12 @@ test('setBuildConfig(): use CLI --config', t => {
   t.is(config.layout.annotation.anchor, 'bottom center')
 })
 
+test.before(() => {
+  if (!fs.existsSync('./build')) {
+    fs.mkdirSync('./build')
+  }
+})
+
 test('prepare()', t => {
   const config = { workingDir: '.whatever' }
 
@@ -78,12 +84,7 @@ test('generateFontFiles()', t => {
   }
 
   helpers.generateFontFiles(content, config).then(() => {
-    const buildDirector = './build'
-    if (!fs.existsSync(buildDirector)) {
-      fs.mkdirSync(buildDirector)
-    }
-    const directoryPath = path.resolve(buildDirector)
-
+    const directoryPath = path.resolve('./build')
     t.true(fs.stat(`${directoryPath}/RFC-config-font-name.ttf`))
     fs.unlink(`${directoryPath}/RFC-config-font-name.ttf`)
   })
