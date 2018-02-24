@@ -70,13 +70,17 @@ test("writeFont()", t => {
 });
 
 test("generateFontFiles()", t => {
-  const content = {
-    ttf: "font-data"
+  const content = { ttf: "font-data" };
+  const config = {
+    formats: ["ttf"],
+    fontName: "RFC-config-font-name",
+    destFilename: ".whatever",
   };
-  const config = { formats: ["otf"], destFilename: ".whatever" };
 
   helpers.generateFontFiles(content, config).then(() => {
-    t.true(fs.stat(`${config.destFilename}.otf`));
-    fs.unlink(`${config.destFilename}.otf`);
+    const directoryPath = path.resolve(`./build`);
+
+    t.true(fs.stat(`${directoryPath}/RFC-config-font-name.ttf`));
+    fs.unlink(`${directoryPath}/RFC-config-font-name.ttf`);
   });
 });

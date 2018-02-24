@@ -51,21 +51,25 @@ export default {
     });
   },
   generateFontFiles(content, config) {
+    const self = this;
+
     return new Promise((resolve, reject) => {
-      config.formats.map(format =>
-        this.writeFont(content[format], `${config.destFilename}.${format}`)
+      // eslint-disable-next-line func-names
+      config.formats.map(format => {
+        const directoryPath = path.resolve(`./build`);
+        const filePath = `${directoryPath}/${config.fontName}.${format}`;
+
+        return self
+          .writeFont(content[format], filePath)
           .then(() => {
-            console.log(`wrote: ${config.destFilename}.${format}`);
+            console.log(`wrote: ${filePath}`);
           })
           .catch(err => {
             reject();
-            console.log(
-              `failed to write ${config.destFilename}.${format}`,
-              err
-            );
-          })
-      );
+            console.error(`failed to write ${filePath}`, err);
+          });
+      });
       resolve();
     });
-  }
+  },
 };
