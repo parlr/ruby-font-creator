@@ -9,6 +9,7 @@
   "scripts": {
     "build": "node --max_old_space_size=8192 --optimize_for_size --max_executable_size=4096 --stack_size=4096 --require babel-core/register ./index.js",
     "test": "ava test --fail-fast --verbose",
+    "precommit": "./node_modules/.bin/prettier-eslint --write '**/*.js'",
     "prepush": "npm test",
     "reset": "rm build/ -rf; mkdir -p build/svg",
     "install-font": "cp build/ruby-font-creator.ttf ~/.local/share/fonts/",
@@ -35,7 +36,8 @@
     "eslint-config-airbnb-base": "^11.1.2",
     "eslint-config-prettier": "^1.5.0",
     "eslint-plugin-import": "^2.2.0",
-    "husky": "0.13.x"
+    "husky": "^0.14.3",
+    "prettier-eslint-cli": "^4.7.1"
   },
   "ava": {
     "require": [
@@ -52,6 +54,10 @@
       "transform-runtime"
     ],
     "comments": false
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   },
   "version": "1.1.1"
 }
