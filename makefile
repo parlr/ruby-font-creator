@@ -1,13 +1,8 @@
 #!/usr/bin/make -f
 
-# force use of Bash
-SHELL := /bin/bash
+MAKEFLAGS += --silent  # by default
+SHELL := /bin/bash  # force use of Bash
 INTERACTIVE=true
-
-ifndef VERBOSE
-.SILENT:
-endif
-
 
 .PHONY: default \
 	help
