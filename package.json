@@ -7,7 +7,7 @@
     "Hugo Lopez"
   ],
   "scripts": {
-    "build": "node --max_old_space_size=8192 --optimize_for_size --max_executable_size=4096 --stack_size=4096 --require babel-core/register ./index.js",
+    "build": "node --max_old_space_size=8192 --optimize_for_size --stack_size=4096 --require babel-core/register ./index.js",
     "test": "ava test --fail-fast --verbose",
     "precommit": "./node_modules/.bin/prettier-eslint --write '**/*.js'",
     "prepush": "npm test"
