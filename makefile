@@ -15,7 +15,7 @@ help:
 reset:
 	rm build/ -rf; mkdir -p build/svg
 
-install-font:  # copy font to local font directory
+install-build-font:
 	cp build/*.{otf,ttf,woff,woff2} ~/.local/share/fonts/
 
 remove-font:
