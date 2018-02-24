@@ -56,26 +56,26 @@ test.before(() => {
   }
 })
 
-test('prepare()', t => {
+test('prepare()', async t => {
   const config = { workingDir: '.whatever' }
 
-  helpers.prepare(config).then(() => {
-    t.true(fs.stat(config.workingDir))
-    fs.rmdir(config.workingDir)
+  await helpers.prepare(config).then(() => {
+    t.true(fs.existsSync(config.workingDir))
+    fs.rmdirSync(config.workingDir)
   })
 })
 
-test('writeFont()', t => {
+test('writeFont()', async t => {
   const content = 'hello'
   const destination = '.whatever.txt'
 
-  helpers.writeFont(content, destination).then(() => {
-    t.true(fs.stat(destination))
-    fs.unlink(destination)
+  await helpers.writeFont(content, destination).then(() => {
+    t.true(fs.existsSync(destination))
+    fs.unlinkSync(destination)
   })
 })
 
-test('generateFontFiles()', t => {
+test('generateFontFiles()', async t => {
   const content = { ttf: 'font-data' }
   const config = {
     formats: ['ttf'],
@@ -83,9 +83,9 @@ test('generateFontFiles()', t => {
     destFilename: '.whatever'
   }
 
-  helpers.generateFontFiles(content, config).then(() => {
+  await helpers.generateFontFiles(content, config).then(() => {
     const directoryPath = path.resolve('./build')
-    t.true(fs.stat(`${directoryPath}/RFC-config-font-name.ttf`))
-    fs.unlink(`${directoryPath}/RFC-config-font-name.ttf`)
+    t.true(fs.existsSync(`${directoryPath}/RFC-config-font-name.ttf`))
+    fs.unlinkSync(`${directoryPath}/RFC-config-font-name.ttf`)
   })
 })
