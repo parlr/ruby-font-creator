@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import mkdirp from 'mkdirp'
 
 export default {
   setFontName(config, cliArguments) {
@@ -30,25 +31,18 @@ export default {
     return config
   },
   prepare(config) {
-    return new Promise((resolve, reject) =>
-      fs.mkdir(`${config.workingDir}`, err => {
-        if (err && err.code !== 'EEXIST') {
-          reject()
-        }
-        resolve()
-      })
-    )
+    try {
+      return fs.mkdirSync(config.workingDir).resolve()
+    } catch (error) {
+      return Promise.resolve(new Error(error))
+    }
   },
   writeFont(content, destination) {
-    return new Promise((resolve, reject) => {
-      fs.writeFile(destination, content, error => {
-        if (error) {
-          return reject(new Error(error))
-        }
-
-        return resolve()
-      })
-    })
+    try {
+      return fs.writeFileSync(destination, content).resolve()
+    } catch (error) {
+      return Promise.resolve(new Error(error))
+    }
   },
   generateFontFiles(content, config) {
     const self = this
@@ -61,9 +55,7 @@ export default {
 
         return self
           .writeFont(content[format], filePath)
-          .then(() => {
-            console.log(`wrote: ${filePath}`)
-          })
+          .then(() => console.log(`wrote: ${filePath}`))
           .catch(err => {
             reject()
             console.error(`failed to write ${filePath}`, err)
