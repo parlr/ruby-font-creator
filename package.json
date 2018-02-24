@@ -21,7 +21,7 @@
     "yargs": "^7.0.2"
   },
   "devDependencies": {
-    "ava": "0.18.x",
+    "ava": "0.25.x",
     "babel-core": "6.24.x",
     "babel-loader": "6.4.x",
     "babel-plugin-transform-runtime": "6.23.x",
