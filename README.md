@@ -42,6 +42,8 @@ Font creator to help students **learn and read foreign languages faster** by app
 
 	yarn build --  --font-name 'custom-font-name'
 
+:information_source: maintenance tasks available are in the [makefile][./makefile], run `make` to see possible actions.
+
 ## Data Structure
 
 A list of objects, each describing a glyph, with the following 3 elements:
