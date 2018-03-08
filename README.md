@@ -9,13 +9,16 @@ Font creator to help students **learn and read foreign languages faster** by app
 
 | languages | preview | state | repository | base-font
 | --- | :---: | :---: | --- | --- |
-| Chinese | ![top](resources/tpl/annotation-top.png)  | **✔** | [hanzi-pinyin-font](https://github.com/parlr/hanzi-pinyin-font/releases) | [DroidSansFallbackFull](https://github.com/parlr/platform_frameworks_base/blob/562c45cc841681ed80d4e94515b23c28eb60eae4/data/fonts/DroidSansFallbackFull.ttf)
+| Chinese | ![top](resources/tpl/annotation-top.png)  | **✔️** | [hanzi-pinyin-font](https://github.com/parlr/hanzi-pinyin-font/releases) | [DroidSansFallbackFull](https://github.com/parlr/platform_frameworks_base/blob/562c45cc841681ed80d4e94515b23c28eb60eae4/data/fonts/DroidSansFallbackFull.ttf)
+| Tifinagh | -  | **🏃‍** | [hanzi-pinyin-font](https://github.com/parlr/tifinagh-font/releases) | [DroidSansFallbackFull](https://github.com/parlr/platform_frameworks_base/blob/562c45cc841681ed80d4e94515b23c28eb60eae4/data/fonts/DroidSansFallbackFull.ttf)
 | :speaking_head: [request new one](https://github.com/parlr/ruby-font-creator/issues/new) | - | - | - | Please provide an open-source font |
 
 **Legend:**
-**✖**→
-**★**→
-**✔**
+**⏸**→
+**🏃‍**→
+**✔️**
+
+
 
 
 ### Install
