@@ -9,5 +9,5 @@ export default {
     `<svg width="${options.width}" height="${options.height}">
         ${text}
         ${annotation}
-      </svg>`
+      </svg>`,
 }

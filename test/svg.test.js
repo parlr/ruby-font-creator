@@ -1,14 +1,14 @@
 import fs from 'fs'
 import test from 'ava'
 import del from 'del'
-import jsdom from 'jsdom'
+import { JSDOM } from 'jsdom'
 import svg from '../src/svg'
 
 test.afterEach.always(() => {
   del(['./test/test*.svg'])
 })
 
-test('should save data to svg file asynchornously', async t => {
+test('should save data to svg file asynchornously', async (t) => {
   const content =
     '<svg xmlns="http://www.w3.org/2000/svg"><path d="M22.64 50.17Q15.01…"/></svg>'
 
@@ -18,7 +18,7 @@ test('should save data to svg file asynchornously', async t => {
   t.true(fs.statSync(filename).size > 0)
 })
 
-test('should save data to svg file', t => {
+test('should save data to svg file', (t) => {
   const content =
     '<svg xmlns="http://www.w3.org/2000/svg"><path d="M22.64 50.17Q15.01…"/></svg>'
 
@@ -28,9 +28,9 @@ test('should save data to svg file', t => {
   t.true(fs.statSync(filename).size > 0)
 })
 
-test('wrap()', t => {
+test('wrap()', (t) => {
   const xml = svg.wrap('<path>', '<path>')
 
-  const document = jsdom.jsdom(xml)
+  const { document } = new JSDOM(xml).window
   t.is(document.querySelectorAll('path').length, 2)
 })

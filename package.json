@@ -13,12 +13,12 @@
     "prepush": "npm test"
   },
   "dependencies": {
-    "jsdom": "9.12.x",
-    "jsonfile": "2.4.x",
+    "jsdom": "16.4.0",
+    "jsonfile": "6.1.0",
     "node-tsv-json": "^0.2.1",
-    "text-to-svg": "^3.1.0",
-    "webfont": "^7.1.1",
-    "yargs": "^7.0.2"
+    "text-to-svg": "^3.1.5",
+    "webfont": "^9.0.0",
+    "yargs": "^16.1.0"
   },
   "devDependencies": {
     "ava": "0.25.x",
