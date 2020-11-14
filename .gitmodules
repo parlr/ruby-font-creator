@@ -1,6 +1,0 @@
-[submodule "chinese-data"]
-	path = chinese-data
-	url = git@github.com:parlr/chinese-data.git
-[submodule "hanzi-pinyin-font"]
-	path = hanzi-pinyin-font
-	url = git@github.com:parlr/hanzi-pinyin-font.git
