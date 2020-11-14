@@ -7,7 +7,9 @@ export default {
   get destFilename() {
     return path.resolve(`./build/${this.fontName}`)
   },
-  fontFilepath: path.resolve('./resources/fonts/DroidSansFallbackFull.ttf'),
+  fontFilepath: path.resolve(
+    './resources/fonts/NotosansCJK/NotoSansCJKtc-Regular.otf'
+  ),
   fontName: 'ruby-font-creator',
   formats: ['ttf', 'woff2'],
   inputFiles: './build/**/*.svg',
@@ -15,7 +17,7 @@ export default {
   get layout() {
     return {
       base: layout.base.top(this.canvas),
-      annotation: layout.annotation.bottom(this.canvas)
+      annotation: layout.annotation.bottom(this.canvas),
     }
-  }
+  },
 }
